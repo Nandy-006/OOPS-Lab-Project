@@ -1,7 +1,9 @@
-package oops.oops_project;
+package oops.oops_project.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import oops.oops_project.R;
 
 public class MainActivity extends AppCompatActivity
 {
