@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">OOPS_Project</string>
+    <string name="inventory">Inventory</string>
+    <string name="tasks">Tasks</string>
+    <string name="notes">Notes</string>
+    <string name="diary">Diary</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bnav_inventory"
+        android:icon="@drawable/baseline_backpack_24"
+        android:title="@string/inventory"/>
+    <item
+        android:id="@+id/bnav_tasks"
+        android:icon="@drawable/baseline_event_24"
+        android:title="@string/tasks"/>
+    <item
+        android:id="@+id/bnav_fab"
+        android:title=""/>
+    <item
+        android:id="@+id/bnav_notes"
+        android:icon="@drawable/baseline_history_edu_24"
+        android:title="@string/notes"/>
+    <item
+        android:id="@+id/bnav_diary"
+        android:icon="@drawable/baseline_book_24"
+        android:title="@string/diary"/>
+</menu>
