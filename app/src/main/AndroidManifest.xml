@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OOPS_Project">
-        <activity android:name=".Activities.NavigatingDashboardActivity"></activity>
+        <activity android:name=".Activities.NavigatingDashboardActivity" />
         <activity android:name=".Activities.DashboardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
