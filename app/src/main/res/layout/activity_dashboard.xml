@@ -1,92 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:rowCount="2"
-    android:columnCount="2"
+    android:orientation="vertical"
     tools:context=".Activities.DashboardActivity">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/Inventory_card"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:layout_margin="8dp"
-        android:layout_marginTop="32dp"
-        app:cardCornerRadius="16dp"
-        android:onClick="choseInventory">
+    <include
+        android:id="@+id/toolbar_dashboard"
+        layout="@layout/toolbar_main"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/inventory"
-            android:gravity="center"
-            android:background="@color/teal_200"/>
+    <GridLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:rowCount="2"
+        android:columnCount="2">
 
-    </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/Inventory_card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_margin="8dp"
+            android:layout_marginTop="32dp"
+            app:cardCornerRadius="16dp"
+            android:onClick="choseInventory">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/Tasks_card"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:layout_margin="8dp"
-        android:layout_marginTop="32dp"
-        app:cardCornerRadius="16dp"
-        android:onClick="choseTasks">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/inventory"
+                android:gravity="center"
+                android:background="@color/teal_200"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/tasks"
-            android:gravity="center"
-            android:background="@color/purple_200"/>
+        </com.google.android.material.card.MaterialCardView>
 
-    </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/Tasks_card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_margin="8dp"
+            android:layout_marginTop="32dp"
+            app:cardCornerRadius="16dp"
+            android:onClick="choseTasks">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/Notes_card"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:layout_margin="8dp"
-        android:layout_marginBottom="32dp"
-        app:cardCornerRadius="16dp"
-        android:onClick="choseNotes">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/tasks"
+                android:gravity="center"
+                android:background="@color/purple_200"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/notes"
-            android:gravity="center"
-            android:background="@color/purple_500"/>
+        </com.google.android.material.card.MaterialCardView>
 
-    </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/Notes_card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="32dp"
+            app:cardCornerRadius="16dp"
+            android:onClick="choseNotes">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/Diary_card"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:layout_margin="8dp"
-        android:layout_marginBottom="32dp"
-        app:cardCornerRadius="16dp"
-        android:onClick="choseDiary">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/notes"
+                android:gravity="center"
+                android:background="@color/purple_500"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/diary"
-            android:gravity="center"
-            android:background="@color/purple_700"/>
+        </com.google.android.material.card.MaterialCardView>
 
-    </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/Diary_card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="32dp"
+            app:cardCornerRadius="16dp"
+            android:onClick="choseDiary">
 
-</GridLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/diary"
+                android:gravity="center"
+                android:background="@color/purple_700"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </GridLayout>
+</LinearLayout>

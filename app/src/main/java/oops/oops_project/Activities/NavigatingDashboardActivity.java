@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Stack;
@@ -27,6 +28,9 @@ public class NavigatingDashboardActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigating_dashboard);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar_nav_dashboard);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fab = findViewById(R.id.fab);
         bottomNav = findViewById(R.id.bottom_nav);
@@ -53,6 +57,7 @@ public class NavigatingDashboardActivity extends AppCompatActivity
         {
 
             fab.setImageResource(fabImageResource);
+            getSupportActionBar().setTitle(category);
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             if(cur_category.equals(""))
