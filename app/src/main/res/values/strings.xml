@@ -19,4 +19,6 @@
     <string name="search_category_page">Search</string>
     <string name="floating_action_button_add_category">Add Category</string>
     <string name="floating_action_button_add_item">Add Item</string>
+    <string name="facebook_application_id" translatable="false">oops.oops_project</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fboops.oops_project</string>
 </resources>
