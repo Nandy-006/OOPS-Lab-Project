@@ -2,6 +2,7 @@ package oops.oops_project.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,21 +22,26 @@ import oops.oops_project.R;
 public class MainActivity extends AppCompatActivity
 {
     private static final int RC_SIGN_IN = 123;
-
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
         createSignInIntent();
         setContentView(R.layout.activity_main);
         signOut();
 
     }
 
+
+
     public void createSignInIntent() {
         // [START auth_fui_create_intent]
         // Choose authentication providers
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.PhoneBuilder().build(),
@@ -67,9 +73,7 @@ public class MainActivity extends AppCompatActivity
             } else {
                 response.getError().getErrorCode();
                 // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
+
             }
         }
     }
