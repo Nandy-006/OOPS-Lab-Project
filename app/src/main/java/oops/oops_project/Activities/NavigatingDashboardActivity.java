@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import android.app.Dialog;
+import android.view.MenuItem;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -247,7 +249,7 @@ public class NavigatingDashboardActivity extends AppCompatActivity
         }
     }
 
-    private static class BnavItem
+    static class BnavItem
     {
         int item, fabImage;
 
