@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +15,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Stack;
 
+import oops.oops_project.Database.Notes;
 import oops.oops_project.Fragments.*;
 import oops.oops_project.R;
 
@@ -121,6 +122,14 @@ public class NavigatingDashboardActivity extends AppCompatActivity
 
         DiaryFragment diaryFragment = (DiaryFragment) getSupportFragmentManager().findFragmentByTag("Diary");
         diaryFragment.setEditmode();
+    }
+
+    public void showNote(int position)
+    {
+        Intent intent = new Intent(this, NoteContentActivity.class);
+        intent.putExtra(NoteContentActivity.TITLE, Notes.getTitle(position));
+        intent.putExtra(NoteContentActivity.CONTENT, Notes.getContent(position));
+        startActivity(intent);
     }
 
     @Override

@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OOPS_Project">
-        <activity android:name=".Activities.NavigatingDashboardActivity" android:parentActivityName=".Activities.DashboardActivity"/>
+        <activity android:name=".Activities.NoteContentActivity"></activity>
+        <activity
+            android:name=".Activities.NavigatingDashboardActivity"
+            android:parentActivityName=".Activities.DashboardActivity" />
         <activity android:name=".Activities.DashboardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
