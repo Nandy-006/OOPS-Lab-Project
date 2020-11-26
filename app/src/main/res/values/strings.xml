@@ -10,4 +10,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="share_category_page">Share Page</string>
+    <string name="search_category_page">Search</string>
+    <string name="floating_action_button_add_category">Add Category</string>
+    <string name="floating_action_button_add_item">Add Item</string>
 </resources>

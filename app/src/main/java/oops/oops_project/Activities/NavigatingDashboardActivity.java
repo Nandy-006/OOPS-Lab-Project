@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -101,7 +103,7 @@ public class NavigatingDashboardActivity extends AppCompatActivity
         super.onBackPressed();
     }
 
-    private static class BnavItem
+    static class BnavItem
     {
         int item, fabImage;
 
