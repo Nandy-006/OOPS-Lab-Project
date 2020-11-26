@@ -4,10 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Stack;
 
@@ -17,6 +21,7 @@ import oops.oops_project.R;
 public class NavigatingDashboardActivity extends AppCompatActivity
 {
     private String cur_category = "";
+    private boolean diaryEditMode = false;
     private BottomNavigationView bottomNav;
     private FloatingActionButton fab;
     private Listener listener;
@@ -61,9 +66,9 @@ public class NavigatingDashboardActivity extends AppCompatActivity
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             if(cur_category.equals(""))
-                ft.add(R.id.fragment_container, fragment);
+                ft.add(R.id.fragment_container, fragment, category);
             else
-                ft.replace(R.id.fragment_container, fragment);
+                ft.replace(R.id.fragment_container, fragment, category);
             if(!firstTime)
                 ft.addToBackStack(null);
             else
@@ -87,18 +92,72 @@ public class NavigatingDashboardActivity extends AppCompatActivity
         }
     }
 
+    public void onClickFAB(View view)
+    {
+        if(cur_category.equals("Diary"))
+        {
+            if(diaryEditMode)
+                saveDiary(false);
+            else
+                editDiary();
+        }
+    }
+
+    public void saveDiary(boolean discard)
+    {
+        diaryEditMode = false;
+        bnavBackStack.pop();
+        fab.setImageResource(bnavBackStack.peek().fabImage);
+
+        DiaryFragment diaryFragment = (DiaryFragment) getSupportFragmentManager().findFragmentByTag("Diary");
+        diaryFragment.saveContent(discard);
+    }
+
+    public void editDiary()
+    {
+        diaryEditMode = true;
+        fab.setImageResource(R.drawable.baseline_save_24);
+        bnavBackStack.push(new BnavItem(R.id.bnav_diary, R.drawable.baseline_save_24));
+
+        DiaryFragment diaryFragment = (DiaryFragment) getSupportFragmentManager().findFragmentByTag("Diary");
+        diaryFragment.setEditmode();
+    }
+
     @Override
     public void onBackPressed()
     {
-        if(bnavBackStack.size() > 1)
+        if(diaryEditMode)
         {
-            bottomNav.setOnNavigationItemSelectedListener(null);
-            bnavBackStack.pop();
-            bottomNav.setSelectedItemId(bnavBackStack.peek().item);
-            fab.setImageResource(bnavBackStack.peek().fabImage);
-            bottomNav.setOnNavigationItemSelectedListener(listener);
+            DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    if(which == DialogInterface.BUTTON_NEGATIVE)
+                        saveDiary(true);
+                    else if(which == DialogInterface.BUTTON_POSITIVE)
+                        saveDiary(false);
+                }
+            };
+
+            MaterialAlertDialogBuilder discardDialog = new MaterialAlertDialogBuilder(this);
+            discardDialog.setTitle("Save changes?");
+            discardDialog.setNeutralButton("CANCEL", dialogListener);
+            discardDialog.setNegativeButton("DISCARD", dialogListener);
+            discardDialog.setPositiveButton("SAVE", dialogListener);
+            discardDialog.show();
         }
-        super.onBackPressed();
+        else
+        {
+            if (bnavBackStack.size() > 1)
+            {
+                bottomNav.setOnNavigationItemSelectedListener(null);
+                bnavBackStack.pop();
+                bottomNav.setSelectedItemId(bnavBackStack.peek().item);
+                fab.setImageResource(bnavBackStack.peek().fabImage);
+                bottomNav.setOnNavigationItemSelectedListener(listener);
+            }
+            super.onBackPressed();
+        }
     }
 
     private static class BnavItem

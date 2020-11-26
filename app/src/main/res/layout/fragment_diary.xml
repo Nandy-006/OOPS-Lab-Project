@@ -1,14 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Fragments.DiaryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/diary" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/diary_left_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="16dp"
+            android:layout_margin="16dp"
+            android:elevation="2dp"
+            android:src="@drawable/baseline_keyboard_arrow_left_24"
+            android:contentDescription="@string/left"/>
+
+        <TextView
+            android:id="@+id/diary_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="16dp"
+            android:padding="8dp"
+            android:gravity="center"
+            android:typeface="serif"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/diary_right_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="16dp"
+            android:layout_margin="16dp"
+            android:elevation="2dp"
+            android:src="@drawable/baseline_keyboard_arrow_right_24"
+            android:contentDescription="@string/right"/>
+
+        <ImageButton
+            android:id="@+id/diary_calendar_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_marginVertical="16dp"
+            android:layout_marginHorizontal="8dp"
+            android:elevation="2dp"
+            android:src="@drawable/baseline_today_24"
+            android:contentDescription="@string/calendar_icon"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/diary_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+</LinearLayout>

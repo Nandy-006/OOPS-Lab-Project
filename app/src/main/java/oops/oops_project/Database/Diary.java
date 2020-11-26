@@ -1,18 +1,17 @@
 package oops.oops_project.Database;
 
-import java.util.Date;
 import java.util.HashMap;
 
 public class Diary
 {
-    public static HashMap<Date, Content> diary = new HashMap<>();
+    public static HashMap<String, Content> diary = new HashMap<>();
 
-    public static void putEntry(Date date, String title, String desc)
+    public static void putEntry(String date, String title, String desc)
     {
         diary.put(date, new Content(title, desc));
     }
 
-    public static String getTitle(Date date)
+    public static String getTitle(String date)
     {
         try {
             return diary.get(date).title;
@@ -22,7 +21,7 @@ public class Diary
         }
     }
 
-    public static String getDesc(Date date)
+    public static String getDesc(String date)
     {
         try {
             return diary.get(date).desc;
