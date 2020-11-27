@@ -1,8 +1,6 @@
-package oops.oops_project.Activities;
+package oops.oops_project.Database;
 
 import java.util.ArrayList;
-
-import oops.oops_project.Database.Item;
 
 public class Category {
 

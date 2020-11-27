@@ -1,4 +1,4 @@
-package oops.oops_project.Activities;
+package oops.oops_project.Dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

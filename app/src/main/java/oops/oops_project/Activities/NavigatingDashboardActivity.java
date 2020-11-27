@@ -12,15 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-import android.app.Dialog;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -31,16 +24,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.Date;
 import java.util.Stack;
-import java.util.ArrayList;
 
 import oops.oops_project.Adapters.FirebaseNotesAdapter;
+import oops.oops_project.Database.Category;
+import oops.oops_project.Dialogs.AddCategoryDialog;
 import oops.oops_project.FirestoreDatabase.Note;
 import oops.oops_project.Database.Inventory;
 import oops.oops_project.Fragments.DiaryFragment;
 import oops.oops_project.Fragments.InventoryFragment;
 import oops.oops_project.Fragments.NotesFragment;
 import oops.oops_project.Fragments.TasksFragment;
-import oops.oops_project.Fragments.*;
 
 import oops.oops_project.R;
 
