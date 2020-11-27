@@ -9,14 +9,48 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OOPS_Project">
-        <activity android:name=".Activities.NavigatingDashboardActivity" android:parentActivityName=".Activities.DashboardActivity"/>
-        <activity android:name=".Activities.DashboardActivity">
+        <activity android:name=".Activities.UserDetailsEntry"></activity>
+
+        <activity android:name=".AuthActivities.Registration"></activity>
+
+        <activity android:name=".Activities.MainActivity" />
+
+
+        <activity
+            android:name=".Activities.NavigatingDashboardActivity"
+            android:parentActivityName=".Activities.DashboardActivity" />
+        <activity android:name=".Activities.DashboardActivity" />
+
+        <activity android:name=".AuthActivities.StartUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name=".AuthActivities.FacebookLoginActivity"
+            android:label="@string/label_facebook_login" />
+        <activity
+            android:name=".AuthActivities.GoogleSignInActivity"
+            android:label="@string/label_google_sign_in" />
+        <activity
+            android:name=".AuthActivities.EmailPasswordActivity"
+            android:label="@string/label_emailpassword"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".AuthActivities.AnonymousAuthActivity"
+            android:label="@string/label_anonymous_auth" />
+        <activity
+            android:name=".AuthActivities.ManageUserActivity"
+            android:label="@string/label_manage_user"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".AuthActivities.PhoneAuthActivity"
+            android:label="@string/label_phone_auth" />
+
     </application>
 
 </manifest>

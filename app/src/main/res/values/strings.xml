@@ -10,4 +10,71 @@
     <string name="title_notifications">Notifications</string>
     <string name="facebook_application_id" translatable="false">oops.oops_project</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fboops.oops_project</string>
+    <string name="no_internet_connection" />
+    <string name="phone_number">Phone Number</string>
+
+
+
+    <string name="label_google_sign_in">Firebase + Google Sign In</string>
+    <string name="label_facebook_login">Firebase + Facebook Login</string>
+    <string name="label_twitter_login">Firebase + Twitter Login</string>
+    <string name="label_emailpassword">Email/Password Authentication</string>
+    <string name="label_anonymous_auth">Anonymous Authentication</string>
+    <string name="label_phone_auth">Phone Authentication</string>
+    <string name="label_manage_user">Manage User</string>
+
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="loading">Loading…</string>
+    <string name="signed_out">Signed Out</string>
+
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_photo">Photo URL</string>
+
+    <string name="logout">Logout?</string>
+    <string name="anonymous_signin">Anonymous Sign In</string>
+    <string name="account_link">Account Linking</string>
+    <string name="account_link_btn">Link Account</string>
+    <string name="title_provider">User\'s provider</string>
+    <string name="title_profile">User\'s profile</string>
+    <string name="title_update_profile">Update user\'s profile</string>
+    <string name="title_update_email">Update user\'s email</string>
+    <string name="title_update_password">Update user\'s password</string>
+    <string name="title_send_password_reset">Send password reset</string>
+    <string name="title_delete_user">Delete a user</string>
+    <string name="updated">%s updated.</string>
+    <string name="verify">Verify</string>
+
+    <string name="start_phone_auth">Start</string>
+    <string name="verify_phone_auth">Verify</string>
+    <string name="resend_phone_auth">Resend</string>
+    <string name="hint_phone_number">Phone Number</string>
+    <string name="hint_verification_code">Verification Code</string>
+    <string name="status_verification_succeeded">Verification succeeded</string>
+    <string name="status_sign_in_failed">Sign-in failed</string>
+    <string name="instant_validation">(instant validation)</string>
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login">Login</string>
+    <string name="UserName">Name</string>
+    <string name="PhoneOfUser">Phone</string>
+    <string name="user_registration_submission">Register</string>
+    <string name="continue_to_dashboard">Continue</string>
+    <string-array name="profession_array">
+        <item>Home-maker</item>
+        <item>Office professional</item>
+        <item>Other</item>
+    </string-array>
 </resources>
