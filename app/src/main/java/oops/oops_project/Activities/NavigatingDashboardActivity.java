@@ -4,19 +4,27 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 import java.util.Stack;
 
+import oops.oops_project.Database.Inventory;
 import oops.oops_project.Fragments.*;
 import oops.oops_project.R;
 
-public class NavigatingDashboardActivity extends AppCompatActivity
+public class NavigatingDashboardActivity extends AppCompatActivity  implements AddCategoryDialog.AddCategoryDialogListener
 {
     private String cur_category = "";
     private BottomNavigationView bottomNav;
@@ -24,6 +32,7 @@ public class NavigatingDashboardActivity extends AppCompatActivity
     private Listener listener;
     private final Stack<BnavItem> bnavBackStack = new Stack<>();
     public static final String CHOICE = "choice";
+    private Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,7 +57,6 @@ public class NavigatingDashboardActivity extends AppCompatActivity
     {
         String category;
         int fabImageResource;
-        Fragment fragment;
 
         if(id == R.id.bnav_inventory) { category = "Inventory"; fragment = new InventoryFragment(); fabImageResource = R.drawable.baseline_add_24;}
         else if(id == R.id.bnav_tasks) { category = "Tasks"; fragment = new TasksFragment(); fabImageResource = R.drawable.baseline_add_task_24;}
@@ -76,6 +84,12 @@ public class NavigatingDashboardActivity extends AppCompatActivity
 
             cur_category = category;
         }
+    }
+
+    @Override
+    public void applyTexts(String title, String description) {
+        Inventory.categories.add(new Category(title, description));
+        ((InventoryFragment) fragment).adapter.notifyItemInserted(Inventory.categories.size() - 1);
     }
 
     public class Listener implements BottomNavigationView.OnNavigationItemSelectedListener
@@ -113,4 +127,16 @@ public class NavigatingDashboardActivity extends AppCompatActivity
             this.item = item;
         }
     }
+
+    public void onClickFab(View view) {
+        if(cur_category == "Inventory") {
+            openDialog();
+        }
+    }
+
+    public void openDialog() {
+        AddCategoryDialog addCategoryDialog = new AddCategoryDialog();
+        addCategoryDialog.show(getSupportFragmentManager(), "add category dialog");
+    }
+
 }

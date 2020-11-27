@@ -3,22 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/add_category_dialog">
+    android:id="@+id/add_category_dialog"
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/add_category_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:hint="Enter Category Name"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/add_category_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/add_category_title"
-        android:layout_margin="8dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
