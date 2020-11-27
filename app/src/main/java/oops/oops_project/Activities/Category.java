@@ -2,10 +2,17 @@ package oops.oops_project.Activities;
 
 import java.util.ArrayList;
 
+import oops.oops_project.Database.Item;
+
 public class Category {
 
     private String mName;
     private String mDescription;
+    private ArrayList<Item> items;
+
+    public void addItem(Item item) {
+        items.add(item);
+    }
 
     public Category(String name, String description) {
         mName = name;
