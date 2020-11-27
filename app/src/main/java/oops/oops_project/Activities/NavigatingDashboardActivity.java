@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,10 @@ import oops.oops_project.R;
 
 public class NavigatingDashboardActivity extends AppCompatActivity  implements AddCategoryDialog.AddCategoryDialogListener
 {
+    public static final String TITLE = "Title";
+    public static final String CONTENT = "Content";
+    public static final String POS = "Position";
+
     private String cur_category = "";
     private BottomNavigationView bottomNav;
     private FloatingActionButton fab;

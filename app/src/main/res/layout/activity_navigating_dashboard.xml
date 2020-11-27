@@ -7,14 +7,14 @@
     android:layout_width="match_parent"
     tools:context=".Activities.NavigatingDashboardActivity">
 
+    <include
+        android:id="@+id/toolbar_nav_dashboard"
+        layout="@layout/toolbar_main"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <include
-            android:id="@+id/toolbar_nav_dashboard"
-            layout="@layout/toolbar_main"/>
 
         <FrameLayout
             android:id="@+id/fragment_container"

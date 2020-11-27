@@ -8,10 +8,10 @@ public class Category {
 
     private String mName;
     private String mDescription;
-    private ArrayList<Item> items;
+    private ArrayList<Item>[] items;
 
-    public void addItem(Item item) {
-        items.add(item);
+    public void addItem(Item item, int position) {
+        items[position].add(item);
     }
 
     public Category(String name, String description) {

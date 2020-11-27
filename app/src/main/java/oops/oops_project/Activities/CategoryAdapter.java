@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,18 +18,23 @@ import oops.oops_project.R;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    private CategoryListener listener;
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewCategoryName;
         public TextView textViewCategoryDescription;
+        public MaterialCardView cardView;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(MaterialCardView itemView) {
             super(itemView);
-
+            cardView = itemView;
             textViewCategoryName = (TextView) itemView.findViewById(R.id.category_page_item_layout_name);
             textViewCategoryDescription = (TextView) itemView.findViewById(R.id.category_page_item_layout_description);
         }
     }
+
+    public interface CategoryListener { void onClick(int position);}
+    public void setListener(CategoryListener listener) { this.listener = listener;}
 
     private List<Category> mCategories;
 
@@ -40,9 +47,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View categoryView = inflater.inflate(R.layout.category_page_item_layout, parent, false);
+        MaterialCardView cardView = (MaterialCardView) inflater.inflate(R.layout.category_page_item_layout, parent, false);
 
-        ViewHolder viewHolder = new ViewHolder(categoryView);
+        ViewHolder viewHolder = new ViewHolder(cardView);
         return viewHolder;
     }
 
@@ -63,4 +70,5 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public int getItemCount() {
         return mCategories.size();
     }
+
 }

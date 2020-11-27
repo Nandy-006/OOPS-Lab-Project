@@ -36,4 +36,6 @@ public class InventoryFragment extends Fragment {
         rvCategories.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
+
+
 }

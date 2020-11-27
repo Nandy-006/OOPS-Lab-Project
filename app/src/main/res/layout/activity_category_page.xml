@@ -4,16 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        layout="@layout/toolbar_main"
-        android:id="@+id/category_page_toolbar"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView_category_page"
-        android:layout_below="@id/category_page_toolbar">
-
+        android:id="@+id/recyclerView_category_page">
     </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>
