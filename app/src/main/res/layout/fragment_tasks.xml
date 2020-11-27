@@ -5,10 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.TasksFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_category_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/tasks" />
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="-44dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

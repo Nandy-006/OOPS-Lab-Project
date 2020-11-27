@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:layout_height="60dp">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/category_page_item_layout_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
         android:textSize="20sp"
+        android:layout_margin="4dp"
         android:textStyle="bold" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/category_page_item_layout_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/category_page_item_layout_name"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
         android:textSize="14sp" />
 
-</RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

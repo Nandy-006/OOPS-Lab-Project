@@ -46,6 +46,10 @@ import oops.oops_project.R;
 
 public class NavigatingDashboardActivity extends AppCompatActivity  implements AddCategoryDialog.AddCategoryDialogListener
 {
+    public static final String TITLE = "Title";
+    public static final String CONTENT = "Content";
+    public static final String POS = "Position";
+
     private String cur_category = "";
     private boolean diaryEditMode = false;
     private BottomNavigationView bottomNav;
