@@ -1,5 +1,7 @@
 package oops.oops_project.Database;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 import oops.oops_project.Activities.Category;
