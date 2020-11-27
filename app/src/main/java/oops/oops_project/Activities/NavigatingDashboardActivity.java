@@ -9,12 +9,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Stack;
-
 import oops.oops_project.Database.Notes;
 import oops.oops_project.Fragments.*;
 import oops.oops_project.R;
@@ -28,6 +29,7 @@ public class NavigatingDashboardActivity extends AppCompatActivity
     private Listener listener;
     private final Stack<BnavItem> bnavBackStack = new Stack<>();
     public static final String CHOICE = "choice";
+    private Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,11 +50,17 @@ public class NavigatingDashboardActivity extends AppCompatActivity
         bottomNav.setOnNavigationItemSelectedListener(listener);
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        ((NotesFragment) fragment).getAdapter().notifyDataSetChanged();
+    }
+
     private void setFragment(int id, boolean firstTime)
     {
         String category;
         int fabImageResource;
-        Fragment fragment;
 
         if(id == R.id.bnav_inventory) { category = "Inventory"; fragment = new InventoryFragment(); fabImageResource = R.drawable.baseline_add_24;}
         else if(id == R.id.bnav_tasks) { category = "Tasks"; fragment = new TasksFragment(); fabImageResource = R.drawable.baseline_add_task_24;}
@@ -95,7 +103,9 @@ public class NavigatingDashboardActivity extends AppCompatActivity
 
     public void onClickFAB(View view)
     {
-        if(cur_category.equals("Diary"))
+        if(cur_category.equals("Notes"))
+            newNote();
+        else if(cur_category.equals("Diary"))
         {
             if(diaryEditMode)
                 saveDiary(false);
@@ -129,7 +139,41 @@ public class NavigatingDashboardActivity extends AppCompatActivity
         Intent intent = new Intent(this, NoteContentActivity.class);
         intent.putExtra(NoteContentActivity.TITLE, Notes.getTitle(position));
         intent.putExtra(NoteContentActivity.CONTENT, Notes.getContent(position));
+        intent.putExtra(NoteContentActivity.POS, position);
         startActivity(intent);
+    }
+
+    public void newNote()
+    {
+        final EditText input = new EditText(this);
+
+
+        MaterialAlertDialogBuilder newNoteDialog = new MaterialAlertDialogBuilder(this);
+        newNoteDialog.setTitle("New Note");
+        newNoteDialog.setMessage("Enter title for the note:");
+        newNoteDialog.setView(input);
+        newNoteDialog.setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        newNoteDialog.setPositiveButton("CREATE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                String title = input.getText().toString();
+                if(!title.equals(""))
+                {
+                    Notes.putEntry(title, "");
+                    ((NotesFragment) fragment).getAdapter().notifyItemInserted((Notes.notes.size() - 1));
+                    showNote((Notes.notes.size() - 1));
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "Empty title!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        newNoteDialog.show();
     }
 
     @Override

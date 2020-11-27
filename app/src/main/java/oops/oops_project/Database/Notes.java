@@ -17,11 +17,11 @@ public class Notes
     public static String getTitle(int idx) { return notes.get(idx).title;}
     public static String getContent(int idx) { return notes.get(idx).content;}
 
-    private static class Note
+    public static class Note
     {
         String title, content;
 
-        Note(String title, String content)
+        public Note(String title, String content)
         {
             this.title = title;
             this.content = content;

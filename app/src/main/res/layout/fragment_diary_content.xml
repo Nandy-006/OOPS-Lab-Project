@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:padding="8dp"
-            android:hint="@string/diary_title"
+            android:hint="@string/title"
             android:inputType="text"
             android:enabled="false"/>
 
@@ -32,7 +32,7 @@
             android:paddingHorizontal="8dp"
             android:paddingTop="8dp"
             android:paddingBottom="32dp"
-            android:hint="@string/diary_desc"
+            android:hint="@string/desc"
             android:inputType="textMultiLine"
             android:enabled="false"/>
     </LinearLayout>
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:padding="8dp"
-            android:hint="@string/diary_title"
+            android:hint="@string/title"
             android:enabled="false"/>
 
         <TextView
@@ -61,7 +61,7 @@
             android:paddingHorizontal="8dp"
             android:paddingTop="8dp"
             android:paddingBottom="32dp"
-            android:hint="@string/diary_desc"
+            android:hint="@string/desc"
             android:enabled="false"/>
     </LinearLayout>
 

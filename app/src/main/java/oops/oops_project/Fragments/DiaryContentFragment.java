@@ -60,8 +60,8 @@ public class DiaryContentFragment extends Fragment
     {
         if(title.equals(""))
         {
-            titleEditText.setHint(R.string.diary_title);
-            titleViewText.setHint(R.string.diary_title);
+            titleEditText.setHint(R.string.title);
+            titleViewText.setHint(R.string.title);
         }
         else
         {
@@ -71,8 +71,8 @@ public class DiaryContentFragment extends Fragment
 
         if(desc.equals(""))
         {
-            descEditText.setHint(R.string.diary_desc);
-            descViewText.setHint(R.string.diary_desc);
+            descEditText.setHint(R.string.desc);
+            descViewText.setHint(R.string.desc);
         }
         else
         {

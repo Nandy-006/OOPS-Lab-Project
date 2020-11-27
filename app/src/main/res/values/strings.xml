@@ -8,9 +8,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="diary_title">Title</string>
-    <string name="diary_desc">Description</string>
+    <string name="title">Title</string>
+    <string name="desc">Description</string>
+    <string name="content">Content</string>
     <string name="calendar_icon">Calendar Icon</string>
     <string name="left">Left</string>
     <string name="right">Right</string>
+    <string name="save">Save</string>
 </resources>
