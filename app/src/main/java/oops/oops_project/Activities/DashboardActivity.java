@@ -1,16 +1,29 @@
 package oops.oops_project.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import com.google.android.material.appbar.MaterialToolbar;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import oops.oops_project.FirestoreDatabase.Data;
+import oops.oops_project.FirestoreDatabase.User;
 import oops.oops_project.R;
 
 public class DashboardActivity extends AppCompatActivity
 {
     private int id;
+    private User user;
+    private final boolean register = false;
+
+    public static FirebaseFirestore db() { return FirebaseFirestore.getInstance();}
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -21,6 +34,34 @@ public class DashboardActivity extends AppCompatActivity
         MaterialToolbar toolbar = findViewById(R.id.toolbar_dashboard);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Dashboard");
+
+        if(register)
+        {
+            addUser();
+            db().collection("users")
+                    .add(user)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Toast.makeText(getApplicationContext(), ("User added"), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "User not added", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
+    private void addUser()
+    {
+        user = new User();
+        user.setName(Data.name);
+        user.setEmail(Data.email);
+        user.setPhone(Data.phone);
+        user.setProfession(Data.profession);
     }
 
     private void sendIntent()

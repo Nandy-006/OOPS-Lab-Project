@@ -1,9 +1,5 @@
 package oops.oops_project.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +7,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import java.util.Date;
 import java.util.Stack;
-import oops.oops_project.Database.Notes;
-import oops.oops_project.Fragments.*;
+
+import oops.oops_project.Adapters.FirebaseNotesAdapter;
+import oops.oops_project.FirestoreDatabase.Note;
+import oops.oops_project.Fragments.DiaryFragment;
+import oops.oops_project.Fragments.InventoryFragment;
+import oops.oops_project.Fragments.NotesFragment;
+import oops.oops_project.Fragments.TasksFragment;
 import oops.oops_project.R;
 
 public class NavigatingDashboardActivity extends AppCompatActivity
@@ -50,12 +62,15 @@ public class NavigatingDashboardActivity extends AppCompatActivity
         bottomNav.setOnNavigationItemSelectedListener(listener);
     }
 
-    @Override
+    /*@Override
     protected void onResume()
     {
         super.onResume();
-        ((NotesFragment) fragment).getAdapter().notifyDataSetChanged();
-    }
+        try{
+            ((NotesFragment) fragment).getAdapter().notifyDataSetChanged();
+        }
+        catch(Exception e) {}
+    }*/
 
     private void setFragment(int id, boolean firstTime)
     {
@@ -134,13 +149,23 @@ public class NavigatingDashboardActivity extends AppCompatActivity
         diaryFragment.setEditmode();
     }
 
-    public void showNote(int position)
+    public static FirebaseNotesAdapter notesAdapter;
+    public void showNote(DocumentReference savingNote)
     {
-        Intent intent = new Intent(this, NoteContentActivity.class);
-        intent.putExtra(NoteContentActivity.TITLE, Notes.getTitle(position));
-        intent.putExtra(NoteContentActivity.CONTENT, Notes.getContent(position));
-        intent.putExtra(NoteContentActivity.POS, position);
-        startActivity(intent);
+        notesAdapter = ((NotesFragment) fragment).getAdapter();
+
+        savingNote.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Note savedNote = documentSnapshot.toObject(Note.class);
+
+                Intent intent = new Intent(getApplicationContext(), NoteContentActivity.class);
+                intent.putExtra(NoteContentActivity.TITLE, savedNote.getTitle());
+                intent.putExtra(NoteContentActivity.CONTENT, savedNote.getContent());
+                intent.putExtra(NoteContentActivity.REF, savingNote.getPath());
+                startActivity(intent);
+            }
+        });
     }
 
     public void newNote()
@@ -165,9 +190,18 @@ public class NavigatingDashboardActivity extends AppCompatActivity
                 String title = input.getText().toString();
                 if(!title.equals(""))
                 {
-                    Notes.putEntry(title, "");
+                    /*Notes.putEntry(title, "");
                     ((NotesFragment) fragment).getAdapter().notifyItemInserted((Notes.notes.size() - 1));
-                    showNote((Notes.notes.size() - 1));
+                    showNote((Notes.notes.size() - 1));*/
+                    DashboardActivity.db().collection(NotesFragment.NOTES_PATH)
+                            .add(new Note(title, "", new Date()))
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    showNote(documentReference);
+                                }
+                            });
+                    Toast.makeText(getApplicationContext(), "Note added!", Toast.LENGTH_SHORT).show();
                 }
                 else
                     Toast.makeText(getApplicationContext(), "Empty title!", Toast.LENGTH_SHORT).show();

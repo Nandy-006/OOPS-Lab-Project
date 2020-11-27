@@ -1,24 +1,33 @@
 package oops.oops_project.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import oops.oops_project.Database.Notes;
+import com.google.firebase.firestore.DocumentReference;
+
+import java.util.Date;
+
+import oops.oops_project.Adapters.FirebaseNotesAdapter;
+import oops.oops_project.FirestoreDatabase.Note;
 import oops.oops_project.Fragments.NoteDialogFragment;
 import oops.oops_project.R;
+
+import static oops.oops_project.Activities.DashboardActivity.db;
 
 public class NoteContentActivity extends AppCompatActivity
 {
     public static final String TITLE = "Title";
     public static final String CONTENT = "Content";
-    public static final String POS = "Position";
+    public static final String REF = "Reference";
 
     TextView titleText, contentText;
+    FirebaseNotesAdapter adapter = NavigatingDashboardActivity.notesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,8 +62,9 @@ public class NoteContentActivity extends AppCompatActivity
                     dialog.dismiss();
                 else if(which == DialogInterface.BUTTON_POSITIVE)
                 {
-                    int position = (int) getIntent().getExtras().getInt(POS);
-                    Notes.notes.remove(position);
+                    DocumentReference reference = db().document(getIntent().getExtras().getString(REF));
+                    reference.delete();
+                    //Notes.notes.remove(position);
                     finish();
                 }
             }
@@ -72,8 +82,8 @@ public class NoteContentActivity extends AppCompatActivity
         titleText.setText(title);
         contentText.setText(content);
 
-        int position = getIntent().getExtras().getInt(POS);
-        Notes.notes.set(position, new Notes.Note(title, content));
-
+        DocumentReference reference = db().document(getIntent().getExtras().getString(REF));
+        //Notes.notes.set(position, new Notes.Note(title, content));
+        reference.set(new Note(title, content, new Date()));
     }
 }
