@@ -12,10 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import android.app.Dialog;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -25,16 +30,20 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.Date;
 import java.util.Stack;
+import java.util.ArrayList;
 
 import oops.oops_project.Adapters.FirebaseNotesAdapter;
 import oops.oops_project.FirestoreDatabase.Note;
+import oops.oops_project.Database.Inventory;
 import oops.oops_project.Fragments.DiaryFragment;
 import oops.oops_project.Fragments.InventoryFragment;
 import oops.oops_project.Fragments.NotesFragment;
 import oops.oops_project.Fragments.TasksFragment;
+import oops.oops_project.Fragments.*;
+
 import oops.oops_project.R;
 
-public class NavigatingDashboardActivity extends AppCompatActivity
+public class NavigatingDashboardActivity extends AppCompatActivity  implements AddCategoryDialog.AddCategoryDialogListener
 {
     private String cur_category = "";
     private boolean diaryEditMode = false;
@@ -105,6 +114,12 @@ public class NavigatingDashboardActivity extends AppCompatActivity
 
             cur_category = category;
         }
+    }
+
+    @Override
+    public void applyTexts(String title, String description) {
+        Inventory.categories.add(new Category(title, description));
+        ((InventoryFragment) fragment).adapter.notifyItemInserted(Inventory.categories.size() - 1);
     }
 
     public class Listener implements BottomNavigationView.OnNavigationItemSelectedListener
@@ -259,4 +274,16 @@ public class NavigatingDashboardActivity extends AppCompatActivity
             this.item = item;
         }
     }
+
+    public void onClickFab(View view) {
+        if(cur_category == "Inventory") {
+            openDialog();
+        }
+    }
+
+    public void openDialog() {
+        AddCategoryDialog addCategoryDialog = new AddCategoryDialog();
+        addCategoryDialog.show(getSupportFragmentManager(), "add category dialog");
+    }
+
 }
