@@ -9,5 +9,5 @@ import oops.oops_project.Activities.Category;
 public class Inventory
 {
     public static ArrayList<Category> categories = Category.createCategoryList(0);
-
+    
 }
