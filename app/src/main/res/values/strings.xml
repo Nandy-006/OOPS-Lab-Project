@@ -25,7 +25,6 @@
     <string name="phone_number">Phone Number</string>
 
 
-
     <string name="label_google_sign_in">Firebase + Google Sign In</string>
     <string name="label_facebook_login">Firebase + Facebook Login</string>
     <string name="label_twitter_login">Firebase + Twitter Login</string>
@@ -84,6 +83,9 @@
     <string name="user_registration_submission">Register</string>
     <string name="continue_to_dashboard">Continue</string>
     <string name="AppName">Taskete</string>
+    <string name="sign_in_through_google">Sign in through Google</string>
+    <string name="edit_account_details">Edit Account Details</string>
+    <string name="sign_in_through_email">Sign in through email</string>
     <string-array name="profession_array">
         <item>Home-maker</item>
         <item>Office professional</item>

@@ -5,19 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".Activities.ItemActivity">
 
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         android:weightSum="100">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_weight="70"
             android:id="@+id/item_image"
+            android:layout_width="match_parent"
+            android:layout_height="256dp"
+            android:layout_weight="70"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher" />
 
@@ -29,7 +31,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:text="Item Title"
-            android:textColor="#000"
+            android:background="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_below="@id/item_image"/>
@@ -42,7 +45,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:text="Item Description"
-            android:textColor="#000"
+            android:background="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:layout_below="@id/item_title"/>
 
@@ -54,7 +58,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="Item Quantitiy (units):"
-            android:textColor="#000"
+            android:background="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:layout_below="@id/item_description"/>
 
@@ -67,6 +72,8 @@
             android:layout_marginTop="6dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
+            android:background="@color/black"
+            android:textColor="@color/white"
             android:layout_toRightOf="@id/item_qty"
             android:text="0"
             android:id="@+id/quantity_value"

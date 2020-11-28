@@ -4,62 +4,95 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".Registration">
 
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/NameOfUser"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:background="#00FFF6"
+        android:fontFamily="@font/architects_daughter"
         android:hint="@string/UserName"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.125" />
+        app:layout_constraintVertical_bias="0.325" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/PhoneNumber"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:background="#00FFF6"
+        android:fontFamily="@font/architects_daughter"
         android:hint="@string/hint_phone_number"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.246" />
+        app:layout_constraintVertical_bias="0.450
+" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EmailOfUser"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:background="#00FFF6"
+        android:fontFamily="@font/architects_daughter"
         android:hint="@string/hint_email"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.403"
+        app:layout_constraintVertical_bias="0.575
+"
         tools:layout_editor_absoluteX="0dp" />
 
     <Spinner
         android:id="@+id/profession"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/profession_array"
-        android:layout_marginTop="388dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
         android:background="@android:drawable/btn_dropdown"
+        android:entries="@array/profession_array"
         android:spinnerMode="dropdown"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EmailOfUser" />
 
     <Button
         android:id="@+id/SubmitDetailsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/user_registration_submission"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.77" />
+        app:layout_constraintVertical_bias="0.877" />
+
+    <TextView
+        android:id="@+id/SignUpHeading"
+        android:layout_width="283dp"
+        android:layout_height="67dp"
+        android:fontFamily="@font/architects_daughter"
+        android:text="SIGN UP"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="50sp"
+        android:textColor="#FFEB3B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.137" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

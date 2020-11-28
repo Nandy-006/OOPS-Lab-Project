@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/category_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:backgroundTint="@color/black"
+    android:padding="35dp"
+    app:rippleColor="#FFFFFF">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/category_card_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:layout_margin="4dp"
+        android:layout_margin="15dp"
+        android:background="@color/teal_200"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
 </com.google.android.material.card.MaterialCardView>

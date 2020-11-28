@@ -18,6 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:padding="8dp"
+            android:background="@color/white"
+            android:textColor="@color/com_facebook_blue"
             android:hint="@string/title"
             android:inputType="text"
             android:enabled="false"/>
@@ -29,6 +31,8 @@
             android:layout_weight="1"
             android:layout_marginHorizontal="16dp"
             android:gravity="top|start"
+            android:background="@color/white"
+            android:textColor="@color/com_facebook_blue"
             android:paddingHorizontal="8dp"
             android:paddingTop="8dp"
             android:paddingBottom="32dp"
@@ -48,6 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:padding="8dp"
+            android:textColor="@color/white"
+            android:textSize="22dp"
             android:hint="@string/title"
             android:enabled="false"/>
 
@@ -62,6 +68,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="32dp"
             android:hint="@string/desc"
+            android:textColor="@color/white"
             android:enabled="false"/>
     </LinearLayout>
 
