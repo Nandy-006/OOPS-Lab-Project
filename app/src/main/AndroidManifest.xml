@@ -3,6 +3,7 @@
     package="oops.oops_project">
 
     <application
+        android:title= "Taskete"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -51,6 +52,11 @@
             android:name=".AuthActivities.PhoneAuthActivity"
             android:label="@string/label_phone_auth" />
 
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
     </application>
+
 
 </manifest>

@@ -9,6 +9,8 @@ import oops.oops_project.AuthActivities.GoogleSignInActivity;
 import oops.oops_project.AuthActivities.ManageUserActivity;
 import oops.oops_project.AuthActivities.PhoneAuthActivity;
 import oops.oops_project.R;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -56,6 +58,8 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener
 {
+
+
     static boolean loginClicked;
     // tdfsgsfdgsfgjshfljfs
 
