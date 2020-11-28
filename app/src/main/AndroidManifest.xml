@@ -10,8 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OOPS_Project"
         android:title="Taskete">
+
         <activity android:name=".Activities.AddEventActivity"/>
         <activity android:name=".Activities.EventActivity" />
+        <activity android:name=".Activities.MainActivity2"/>
         <activity android:name=".Activities.ItemActivity" />
         <activity android:name=".Activities.CategoryActivity" />
         <activity android:name=".Activities.NoteContentActivity" />

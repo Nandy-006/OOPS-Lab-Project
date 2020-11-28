@@ -56,7 +56,7 @@ public class GoogleSignInActivity extends BaseActivity implements GoogleApiClien
 		setContentView(R.layout.activity_google);
 		//Toast.makeText(getApplicationContext(), "Entered Oncreate", Toast.LENGTH_LONG).show();
 
-		mImageView = findViewById(R.id.logo);
+		mImageView = findViewById(R.id.mainlogo);
 		mTextViewProfile = findViewById(R.id.profile);
 
 		SignInButton signInButton = findViewById(R.id.sign_in_button);

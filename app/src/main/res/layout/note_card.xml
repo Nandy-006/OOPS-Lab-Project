@@ -2,17 +2,20 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:backgroundTint="@color/black"
     android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/note_card_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
         android:layout_margin="16dp"
-        android:textSize="32sp"
-        android:typeface="monospace"
+        android:layout_marginTop="15sp"
+        android:background="#FFEB3B"
+        android:fontFamily="@font/architects_daughter"
+        android:gravity="center_horizontal"
+        android:textSize="25sp"
         android:textStyle="bold"
-        android:background="@color/purple_200"/>
+        android:typeface="monospace" />
 
 </com.google.android.material.card.MaterialCardView>

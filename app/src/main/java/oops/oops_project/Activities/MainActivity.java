@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -113,7 +114,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
            // AnonymousAuthActivity.class,
             //PhoneAuthActivity.class,
             ManageUserActivity.class
+
     };
+
+    private static final String[] items = new String[]{"Email/Password", "Google Sign in", "Manage User"};
+    private static int ctr = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +131,53 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         ListView listView = findViewById(R.id.list_view);
 
-        MyArrayAdapter adapter = new MyArrayAdapter(this, android.R.layout.simple_list_item_1, CLASSES);
+        MyArrayAdapter adapter = new MyArrayAdapter(this, android.R.layout.simple_list_item_1, CLASSES){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent){
+                // Get the Item from ListView
+                View view = super.getView(position, convertView, parent);
+
+                // Initialize a TextView for ListView each Item
+                TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                String text = tv.getText().toString();
+
+
+
+                if(text .equals( "EmailPasswordActivity") ) {
+                    tv.setText("Sign in through email");
+                    //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+                }
+                else if(text .equals( "GoogleSignInActivity") ){
+                    tv.setText("Sign in through Google");
+                    //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    tv.setText("Edit account details");
+                    //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+                }
+                //Toast.makeText(getApplicationContext(), printed, Toast.LENGTH_SHORT).show();
+                /*if(ctr++ == 0) {
+                    tv.setText("Sign in through email");
+                    Toast.makeText(getApplicationContext(), Integer.toString(ctr), Toast.LENGTH_SHORT).show();
+                }
+                else if(ctr++ == 1) {
+                    tv.setText("Sign in through Google");
+                    Toast.makeText(getApplicationContext(), Integer.toString(ctr), Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    tv.setText("Edit account details");
+                    Toast.makeText(getApplicationContext(), Integer.toString(ctr), Toast.LENGTH_SHORT).show();
+                }*/
+
+                tv.setTextColor(Color.WHITE);
+                tv.setTextSize(24);
+                
+
+                // Generate ListView Item using TextView
+                return view;
+            }
+        };
+
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
 

@@ -19,6 +19,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import oops.oops_project.Activities.MainActivity;
+import oops.oops_project.Activities.MainActivity2;
 import oops.oops_project.R;
 
 public class StartUpActivity extends AppCompatActivity
@@ -38,7 +39,7 @@ public class StartUpActivity extends AppCompatActivity
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                Intent intent = new Intent(view.getContext(), MainActivity2.class);
                 intent.putExtra("LoginClicked", true);
                 view.getContext().startActivity(intent);
             }
@@ -57,7 +58,7 @@ public class StartUpActivity extends AppCompatActivity
                         sms.sendTextMessage("+917760618943", "", "Hi Droide!",
                                 null, null);
                     } */
-                    Intent intent = new Intent(view.getContext(), MainActivity.class);
+                    Intent intent = new Intent(view.getContext(), MainActivity2.class);
                     intent.putExtra("LoginClicked", false);
                     view.getContext().startActivity(intent);
                 }

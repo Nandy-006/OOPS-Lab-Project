@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CustomRelativeLayout"
+    android:background="@color/black">
+
+    <Button
+        android:id="@+id/GoToGoogle"
+        android:layout_width="256dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/sign_in_through_google"
+        android:textColor="#FFEB3B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GoToEmail"
+        app:layout_constraintVertical_bias="0.162" />
+
+    <Button
+        android:id="@+id/EditAccount"
+        android:layout_width="256dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/edit_account_details"
+        android:textColor="#FFEB3B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GoToGoogle"
+        app:layout_constraintVertical_bias="0.341" />
+
+    <ImageView
+        android:id="@+id/logo"
+        style="@style/CustomLogoImageView"
+        android:layout_width="256dp"
+        android:layout_height="156dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/home_screen_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <Button
+        android:id="@+id/GoToEmail"
+        android:layout_width="256dp"
+        android:layout_height="64dp"
+        android:text="@string/sign_in_through_email"
+        android:textColor="#FFEB3B"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.463" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

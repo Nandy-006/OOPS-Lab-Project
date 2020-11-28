@@ -85,6 +85,9 @@
     <string name="AppName">Taskete</string>
     <string name="set_date">Set Date</string>
     <string name="set_time">Set Time</string>
+    <string name="sign_in_through_google">Sign in through Google</string>
+    <string name="edit_account_details">Edit Account Details</string>
+    <string name="sign_in_through_email">Sign in through email</string>
     <string-array name="profession_array">
         <item>Home-maker</item>
         <item>Office professional</item>
