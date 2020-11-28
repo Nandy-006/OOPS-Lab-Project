@@ -1,3 +1,4 @@
+/*
 package oops.oops_project.Dialogs;
 
 import android.app.AlertDialog;
@@ -54,3 +55,4 @@ public class AddEventDialog extends AppCompatDialogFragment {
         return builder.create();
     }
 }
+*/

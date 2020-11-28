@@ -7,38 +7,37 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/add_category_title"
+        android:id="@+id/add_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Category Name"
+        android:hint="Enter Item Name"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/add_category_description"
+        android:id="@+id/add_item_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/add_category_title"
+        android:layout_below="@id/add_item_title"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:hint="Enter Category Description"
+        android:hint="Enter Item Description"
         android:textSize="18sp" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_below="@id/add_category_description"
+        android:layout_below="@id/add_item_description"
         android:layout_alignParentStart="true"
         android:layout_marginTop="16dp"
-        android:src="@drawable/baseline_add_photo_alternate_black_18dp"
+        android:src="@drawable/baseline_add_photo_alternate_24"
         android:id="@+id/add_item_image"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Click on the icon to add image"
         android:layout_toRightOf="@id/add_item_image"
-        android:layout_below="@id/add_category_description"
+        android:layout_below="@id/add_item_description"
         android:gravity="center"
         android:layout_marginTop="32dp"
         android:layout_marginLeft="16dp"

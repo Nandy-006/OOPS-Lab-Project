@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -25,24 +24,21 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.Date;
 import java.util.Stack;
 
+import oops.oops_project.Adapters.FirebaseCategoryAdapter;
 import oops.oops_project.Adapters.FirebaseNotesAdapter;
-import oops.oops_project.Database.Category;
 import oops.oops_project.Dialogs.AddCategoryDialog;
+import oops.oops_project.FirestoreDatabase.Category;
 import oops.oops_project.FirestoreDatabase.Note;
-import oops.oops_project.Database.Inventory;
 import oops.oops_project.Fragments.DiaryFragment;
 import oops.oops_project.Fragments.InventoryFragment;
 import oops.oops_project.Fragments.NotesFragment;
 import oops.oops_project.Fragments.TasksFragment;
-
 import oops.oops_project.R;
+
+import static oops.oops_project.Activities.DashboardActivity.db;
 
 public class NavigatingDashboardActivity extends AppCompatActivity  implements AddCategoryDialog.AddCategoryDialogListener
 {
-    public static final String TITLE = "Title";
-    public static final String CONTENT = "Content";
-    public static final String POS = "Position";
-
     private String cur_category = "";
     private boolean diaryEditMode = false;
     private BottomNavigationView bottomNav;
@@ -70,16 +66,6 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
         listener = new Listener();
         bottomNav.setOnNavigationItemSelectedListener(listener);
     }
-
-    /*@Override
-    protected void onResume()
-    {
-        super.onResume();
-        try{
-            ((NotesFragment) fragment).getAdapter().notifyDataSetChanged();
-        }
-        catch(Exception e) {}
-    }*/
 
     private void setFragment(int id, boolean firstTime)
     {
@@ -114,10 +100,13 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
         }
     }
 
+    public static FirebaseCategoryAdapter categoryAdapter;
     @Override
-    public void applyTexts(String title, String description) {
-        Inventory.categories.add(new Category(title, description));
-        ((InventoryFragment) fragment).adapter.notifyItemInserted(Inventory.categories.size() - 1);
+    public void applyTexts(String title, String description)
+    {
+        categoryAdapter = ((InventoryFragment) fragment).getAdapter();
+        db().collection(InventoryFragment.INVENTORY_PATH)
+                .add(new Category(title, description, new Date()));
     }
 
     public class Listener implements BottomNavigationView.OnNavigationItemSelectedListener
@@ -133,7 +122,9 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
 
     public void onClickFAB(View view)
     {
-        if(cur_category.equals("Notes"))
+        if(cur_category == "Inventory")
+            openDialog();
+        else if(cur_category.equals("Notes"))
             newNote();
         else if(cur_category.equals("Diary"))
         {
@@ -165,11 +156,11 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
     }
 
     public static FirebaseNotesAdapter notesAdapter;
-    public void showNote(DocumentReference savingNote)
+    public void showNote(DocumentReference reference)
     {
         notesAdapter = ((NotesFragment) fragment).getAdapter();
 
-        savingNote.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        reference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Note savedNote = documentSnapshot.toObject(Note.class);
@@ -177,7 +168,7 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
                 Intent intent = new Intent(getApplicationContext(), NoteContentActivity.class);
                 intent.putExtra(NoteContentActivity.TITLE, savedNote.getTitle());
                 intent.putExtra(NoteContentActivity.CONTENT, savedNote.getContent());
-                intent.putExtra(NoteContentActivity.REF, savingNote.getPath());
+                intent.putExtra(NoteContentActivity.REF, reference.getPath());
                 startActivity(intent);
             }
         });
@@ -186,7 +177,6 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
     public void newNote()
     {
         final EditText input = new EditText(this);
-
 
         MaterialAlertDialogBuilder newNoteDialog = new MaterialAlertDialogBuilder(this);
         newNoteDialog.setTitle("New Note");
@@ -205,10 +195,7 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
                 String title = input.getText().toString();
                 if(!title.equals(""))
                 {
-                    /*Notes.putEntry(title, "");
-                    ((NotesFragment) fragment).getAdapter().notifyItemInserted((Notes.notes.size() - 1));
-                    showNote((Notes.notes.size() - 1));*/
-                    DashboardActivity.db().collection(NotesFragment.NOTES_PATH)
+                    db().collection(NotesFragment.NOTES_PATH)
                             .add(new Note(title, "", new Date()))
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
@@ -273,13 +260,8 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
         }
     }
 
-    public void onClickFab(View view) {
-        if(cur_category == "Inventory") {
-            openDialog();
-        }
-    }
-
-    public void openDialog() {
+    public void openDialog()
+    {
         AddCategoryDialog addCategoryDialog = new AddCategoryDialog();
         addCategoryDialog.show(getSupportFragmentManager(), "add category dialog");
     }

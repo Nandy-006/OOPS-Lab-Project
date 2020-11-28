@@ -64,7 +64,6 @@ public class NoteContentActivity extends AppCompatActivity
                 {
                     DocumentReference reference = db().document(getIntent().getExtras().getString(REF));
                     reference.delete();
-                    //Notes.notes.remove(position);
                     finish();
                 }
             }
@@ -83,7 +82,6 @@ public class NoteContentActivity extends AppCompatActivity
         contentText.setText(content);
 
         DocumentReference reference = db().document(getIntent().getExtras().getString(REF));
-        //Notes.notes.set(position, new Notes.Note(title, content));
         reference.set(new Note(title, content, new Date()));
     }
 }

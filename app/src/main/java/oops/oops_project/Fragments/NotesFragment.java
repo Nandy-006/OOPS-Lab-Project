@@ -20,31 +20,18 @@ import oops.oops_project.FirestoreDatabase.Data;
 import oops.oops_project.FirestoreDatabase.Note;
 import oops.oops_project.R;
 
+import static oops.oops_project.Activities.DashboardActivity.db;
+
 public class NotesFragment extends Fragment
 {
     public final static String NOTES_PATH = "users" + "/" + Data.DID + "/" + "Notes";
-    //NotesAdapter adapter;
     FirebaseNotesAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         RecyclerView recycler = (RecyclerView) inflater.inflate(R.layout.fragment_notes, container, false);
-
-        /*adapter = new NotesAdapter();
-        recycler.setAdapter(adapter);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recycler.setLayoutManager(layoutManager);
-
-        adapter.setListener(new NotesAdapter.Listener() {
-            @Override
-            public void onClick(int position)
-            {
-                ((NavigatingDashboardActivity) getActivity()).showNote(position);
-            }
-        });*/
         setUpRecyclerView(recycler);
-
         return recycler;
     }
 
@@ -62,7 +49,7 @@ public class NotesFragment extends Fragment
 
     private void setUpRecyclerView(RecyclerView recycler)
     {
-        Query query = DashboardActivity.db().collection(NOTES_PATH).orderBy("date", Query.Direction.DESCENDING);
+        Query query = db().collection(NOTES_PATH).orderBy("date", Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<Note> options = new FirestoreRecyclerOptions.Builder<Note>()
                 .setQuery(query, Note.class)

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activities.CategoryActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/category_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:hint="@string/title"
+            android:layout_margin="8dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/category_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:hint="@string/desc"
+            android:layout_margin="8dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/item_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/fabBGLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorTransBg"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/add_item_fabLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/standard_23"
+        android:padding="@dimen/standard_12"
+        android:layout_marginBottom="@dimen/standard_23"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Item"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_item_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/baseline_add_24"
+            android:onClick="newItem"
+            app:fabSize="mini"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/edit_category_fabLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:layout_marginEnd="@dimen/standard_23"
+        android:padding="@dimen/standard_12"
+        android:layout_marginBottom="@dimen/standard_23"
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom|end"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Category"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/edit_category_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/baseline_create_24"
+            android:onClick="editCategory"
+            app:fabSize="mini"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/delete_category_fabLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:layout_marginEnd="@dimen/standard_23"
+        android:padding="@dimen/standard_12"
+        android:layout_marginBottom="@dimen/standard_23"
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom|end"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete Category"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/delete_category_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/baseline_delete_24"
+            android:onClick="deleteCategory"
+            app:fabSize="mini"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:padding="@dimen/standard_12"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="bottom|end">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/category_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_toys_24"
+            android:onClick="onClickMenuFab"
+            app:fabSize="normal"/>
+
+    </LinearLayout>
+
+</FrameLayout>

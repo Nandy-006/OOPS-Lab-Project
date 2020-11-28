@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OOPS_Project">
-        <activity android:name=".Activities.NoteContentActivity"></activity>
+        <activity android:name=".Activities.ItemActivity"></activity>
+        <activity android:name=".Activities.CategoryActivity" />
+        <activity android:name=".Activities.NoteContentActivity" />
         <activity
             android:name=".Activities.NavigatingDashboardActivity"
             android:parentActivityName=".Activities.DashboardActivity" />

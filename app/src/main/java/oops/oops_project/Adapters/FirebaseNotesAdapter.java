@@ -42,8 +42,6 @@ public class FirebaseNotesAdapter extends FirestoreRecyclerAdapter<Note, Firebas
         });
     }
 
-    /*public void deleteItem(int position) { getSnapshots().getSnapshot(position).getReference().delete();}*/
-
     public DocumentReference getDoc(int position) {return getSnapshots().getSnapshot(position).getReference();}
 
     @NonNull

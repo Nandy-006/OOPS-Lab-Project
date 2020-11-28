@@ -14,13 +14,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginVertical="?android:attr/actionBarSize">
 
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="?android:attr/actionBarSize"/>
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar

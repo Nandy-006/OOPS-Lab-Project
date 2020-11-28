@@ -1,3 +1,4 @@
+/*
 package oops.oops_project.Adapters;
 
 import android.content.Context;
@@ -11,23 +12,20 @@ import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
-import oops.oops_project.Database.Category;
 import oops.oops_project.R;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private CategoryListener listener;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewCategoryName;
-        public TextView textViewCategoryDescription;
+    public class ViewHolder extends RecyclerView.ViewHolder
+    {
         public MaterialCardView cardView;
 
-        public ViewHolder(MaterialCardView itemView) {
-            super(itemView);
-            cardView = itemView;
-            textViewCategoryName = (TextView) itemView.findViewById(R.id.category_page_item_layout_name);
-            textViewCategoryDescription = (TextView) itemView.findViewById(R.id.category_page_item_layout_description);
+        public ViewHolder(MaterialCardView view)
+        {
+            super(view);
+            cardView = view;
         }
     }
 
@@ -45,7 +43,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        MaterialCardView cardView = (MaterialCardView) inflater.inflate(R.layout.category_page_item_layout, parent, false);
+        MaterialCardView cardView = (MaterialCardView) inflater.inflate(R.layout.category_card_layout, parent, false);
 
         ViewHolder viewHolder = new ViewHolder(cardView);
         return viewHolder;
@@ -70,3 +68,4 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
 }
+*/
