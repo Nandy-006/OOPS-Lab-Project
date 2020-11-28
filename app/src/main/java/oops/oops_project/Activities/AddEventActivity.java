@@ -90,7 +90,7 @@ public class AddEventActivity extends AppCompatActivity {
             String name, desc;
             if(!isEdit)
             {
-                String dateTimeString = String.format(Locale.getDefault(), "%02d", chosenDate) +
+                dateTimeString = String.format(Locale.getDefault(), "%02d", chosenDate) +
                         String.format(Locale.getDefault(), "%02d", chosenMonth + 1) +
                         chosenYear + String.format(Locale.getDefault(), "%02d", chosenHour) +
                         String.format(Locale.getDefault(), "%02d", chosenMinute);
