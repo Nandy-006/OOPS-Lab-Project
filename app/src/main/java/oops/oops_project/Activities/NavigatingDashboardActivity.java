@@ -7,27 +7,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-
 import java.util.Date;
 import java.util.Stack;
-
 import oops.oops_project.Adapters.FirebaseCategoryAdapter;
 import oops.oops_project.Adapters.FirebaseNotesAdapter;
 import oops.oops_project.Dialogs.AddCategoryDialog;
 import oops.oops_project.FirestoreDatabase.Category;
+import oops.oops_project.Dialogs.AddEventDialog;
 import oops.oops_project.FirestoreDatabase.Note;
 import oops.oops_project.Fragments.DiaryFragment;
 import oops.oops_project.Fragments.InventoryFragment;
@@ -132,6 +130,14 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
                 saveDiary(false);
             else
                 editDiary();
+        }
+        else if(cur_category.equals("Tasks"))
+        {
+            openEventDialog();
+        }
+        else if(cur_category.equals("Inventory"))
+        {
+            openCategoryDialog();
         }
     }
 
@@ -264,6 +270,11 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
     {
         AddCategoryDialog addCategoryDialog = new AddCategoryDialog();
         addCategoryDialog.show(getSupportFragmentManager(), "add category dialog");
+    }
+
+    public void openEventDialog() {
+        AddEventDialog addEventDialog = new AddEventDialog();
+        addEventDialog.show(getSupportFragmentManager(), "add event dialog");
     }
 
 }

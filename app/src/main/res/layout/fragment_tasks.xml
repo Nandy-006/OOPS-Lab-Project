@@ -6,7 +6,7 @@
     tools:context=".Fragments.TasksFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_category_page"
+        android:id="@+id/recyclerView_event_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="75dp"

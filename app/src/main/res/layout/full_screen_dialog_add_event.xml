@@ -13,15 +13,34 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp" />
 
+    <TextView
+        android:id="@+id/event_date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_name"
+        android:text="Set Date and Time"
+        android:textSize="18dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="8dp"/>
+
+    <Button
+        android:id="@+id/event_set_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_date_text_view"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="8dp"
+        android:text="Set Date" />
+    
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set Date"
-        android:id="@+id/event_set_date"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_below="@id/event_name"
-        android:onClick="SetEventDate"/>
+        android:layout_toRightOf="@id/event_set_date"
+        android:layout_marginLeft="12dp"
+        android:layout_below="@id/event_date_text_view"
+        android:layout_marginTop="4dp"
+        android:text="Set Time"
+        android:id="@+id/event_set_time" />
 
     <EditText
         android:id="@+id/event_description"
