@@ -72,6 +72,7 @@
     <string name="PhoneOfUser">Phone</string>
     <string name="user_registration_submission">Register</string>
     <string name="continue_to_dashboard">Continue</string>
+    <string name="AppName">Taskete</string>
     <string-array name="profession_array">
         <item>Home-maker</item>
         <item>Office professional</item>

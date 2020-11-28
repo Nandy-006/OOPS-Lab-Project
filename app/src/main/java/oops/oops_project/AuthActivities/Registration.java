@@ -21,6 +21,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.List;
 
+import oops.oops_project.Activities.NavigatingDashboardActivity;
 import oops.oops_project.R;
 
 public class Registration extends AppCompatActivity
@@ -76,7 +77,7 @@ public class Registration extends AppCompatActivity
                 else
                 {
                     Toast.makeText(Registration.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Registration.this, PhoneAuthActivity.class);
+                    Intent intent = new Intent(Registration.this, NavigatingDashboardActivity.class);
                     intent.putExtra("phno", Phone);
                     startActivity(intent);
                 }

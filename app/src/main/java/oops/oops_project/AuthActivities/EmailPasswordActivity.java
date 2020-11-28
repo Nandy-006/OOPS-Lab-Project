@@ -1,6 +1,7 @@
 package oops.oops_project.AuthActivities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.appcompat.app.AlertDialog;
+
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -26,9 +29,12 @@ import com.google.firebase.auth.FirebaseUser;
 import java.io.InputStream;
 import java.net.URL;
 
+import oops.oops_project.Activities.DashboardActivity;
+import oops.oops_project.Activities.NavigatingDashboardActivity;
 import oops.oops_project.R;
 
 public class EmailPasswordActivity extends BaseActivity implements View.OnClickListener {
+	private static boolean loginClicked;
 	private static final String TAG = "EmailPasswordActivity";
 	private EditText mEdtEmail, mEdtPassword;
 	private FirebaseAuth mAuth;
@@ -127,7 +133,10 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
 					mTextViewProfile.setTextColor(Color.RED);
 					mTextViewProfile.setText(task.getException().getMessage());
 				} else {
+					Toast.makeText(EmailPasswordActivity.this, "created account", Toast.LENGTH_SHORT).show();
 					mTextViewProfile.setTextColor(Color.DKGRAY);
+					Intent intent = new Intent(getApplicationContext(), EmailPasswordActivity.class);
+					startActivity(intent);
 				}
 				hideProgressDialog();
 			}
@@ -148,6 +157,8 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
 					mTextViewProfile.setText(task.getException().getMessage());
 				} else {
 					mTextViewProfile.setTextColor(Color.DKGRAY);
+					Intent intent = new Intent(getApplicationContext(), NavigatingDashboardActivity.class);
+					startActivity(intent);
 				}
 				hideProgressDialog();
 			}
@@ -201,7 +212,32 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
 			mTextViewProfile.append("\n\n");
 			mTextViewProfile.append("Email Verification: " + user.isEmailVerified());
 
-			if (user.isEmailVerified()) {
+			if (user.isEmailVerified())
+			{
+				Toast.makeText(this, "email verified", Toast.LENGTH_LONG).show();
+				Intent fromintent = getIntent();
+				loginClicked = fromintent.getBooleanExtra("LoginClicked", true);
+				if(loginClicked)
+				{
+					Intent intent = new Intent(this,  DashboardActivity.class);
+					intent.putExtra("LoginClicked", false);
+					startActivity(intent);
+				}
+				else
+				{
+					new Handler().postDelayed(new Runnable() {
+						@Override
+						public void run() {
+
+							String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+							Intent intent = new Intent(getApplicationContext(),  Registration.class);
+							intent.putExtra("LoginClicked", false);
+							intent.putExtra("Email", email);
+							startActivity(intent);
+						}
+					}, 5000);
+
+				}
 				findViewById(R.id.verify_button).setVisibility(View.GONE);
 			}
 			else {
