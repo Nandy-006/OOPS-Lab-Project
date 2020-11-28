@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="160dp"
+    tools:context=".Activities.AddEventActivity">
+
+    <EditText
+        android:id="@+id/event_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:hint="Enter Event Name"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/event_date_text_view"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_name"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/set_date"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/event_set_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/event_name"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@id/event_date_text_view"
+        android:onClick="openDateDialog"
+        android:text="Set Date" />
+
+    <TextView
+        android:id="@+id/event_time_text_view"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_date_text_view"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/set_time"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/event_set_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_set_date"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@id/event_time_text_view"
+        android:onClick="openTimeDialog"
+        android:text="Set Time" />
+
+    <EditText
+        android:id="@+id/event_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_time_text_view"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Enter Event Description"
+        android:inputType="textMultiLine"
+        android:textSize="18dp" />
+
+    <CheckBox
+        android:id="@+id/event_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_description"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="16dp"
+        android:text="Set Reminder?"
+        android:textSize="18dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:layout_marginHorizontal="64dp"
+        android:layout_below="@id/event_reminder"
+        android:onClick="save"
+        android:src="@drawable/baseline_save_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="64dp"
+        android:layout_marginVertical="16dp"
+        android:layout_below="@id/event_reminder"
+        android:layout_toRightOf="@id/save_fab"
+        android:onClick="delete"
+        android:src="@drawable/baseline_close_24" />
+</RelativeLayout>

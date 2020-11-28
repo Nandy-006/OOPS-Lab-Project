@@ -33,13 +33,8 @@ public class AddCategoryDialog extends AppCompatDialogFragment {
 
         builder.setView(view)
                 .setTitle("Add Category")
-                .setNegativeButton("Discard", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                .setNegativeButton("DISCARD", null)
+                .setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String title = editTextCategoryName.getText().toString();

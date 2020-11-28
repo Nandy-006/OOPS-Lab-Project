@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activities.EventActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/activity_task_event_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_200"
+            android:gravity="bottom|center_horizontal"
+            android:text="Event"
+            android:layout_margin="16dp"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="Description"
+            android:layout_below="@id/activity_task_deadline"
+            android:id="@+id/activity_task_description"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:id="@+id/activity_task_deadline"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/activity_task_event_name"
+            android:background="@color/purple_200"
+            android:gravity="center_vertical"
+            android:text="Deadline"
+            android:layout_margin="8dp"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <CheckBox
+            android:id="@+id/activity_task_reminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_task_description"
+            android:text="Reminder"
+            android:layout_margin="16dp"
+            android:clickable="false"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/fabBGLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorTransBg"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/edit_event_fabLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/standard_23"
+        android:padding="@dimen/standard_12"
+        android:layout_marginBottom="@dimen/standard_23"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit event"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/edit_event_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/baseline_create_24"
+            android:onClick="editEvent"
+            app:fabSize="mini"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/delete_event_fabLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/standard_23"
+        android:padding="@dimen/standard_12"
+        android:layout_marginBottom="@dimen/standard_23"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Item"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/delete_event_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/baseline_delete_24"
+            android:onClick="deleteEvent"
+            app:fabSize="mini"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:padding="@dimen/standard_12"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="bottom|end">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/category_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_toys_24"
+        android:onClick="onClickMenuFab"
+        app:fabSize="normal"/>
+    </LinearLayout>
+</FrameLayout>

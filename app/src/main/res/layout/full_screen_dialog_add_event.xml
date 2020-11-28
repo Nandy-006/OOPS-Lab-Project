@@ -15,32 +15,43 @@
 
     <TextView
         android:id="@+id/event_date_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/event_name"
-        android:text="Set Date and Time"
+        android:text="@string/set_date"
         android:textSize="18dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="8dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"/>
 
     <Button
         android:id="@+id/event_set_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/event_date_text_view"
+        android:layout_toRightOf="@id/event_date_text_view"
+        android:layout_below="@+id/event_name"
         android:layout_marginTop="4dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="12dp"
         android:text="Set Date" />
-    
+
+    <TextView
+        android:id="@+id/event_time_text_view"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="@string/set_time"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@id/event_date_text_view"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/event_set_date"
+        android:layout_toRightOf="@id/event_time_text_view"
+        android:layout_below="@id/event_set_date"
         android:layout_marginLeft="12dp"
-        android:layout_below="@id/event_date_text_view"
         android:layout_marginTop="4dp"
         android:text="Set Time"
-        android:id="@+id/event_set_time" />
+        android:id="@+id/event_set_time"/>
 
     <EditText
         android:id="@+id/event_description"
@@ -53,7 +64,7 @@
         android:layout_marginTop="16dp"
         android:hint="Enter Event Description"
         android:textSize="18dp"
-        android:layout_below="@id/event_set_date"/>
+        android:layout_below="@id/event_time_text_view"/>
 
     <CheckBox
         android:id="@+id/event_reminder"

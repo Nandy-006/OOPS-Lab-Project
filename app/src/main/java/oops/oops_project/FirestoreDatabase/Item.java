@@ -4,8 +4,10 @@ import oops.oops_project.R;
 
 public class Item
 {
+    public static final int DEFAULT_ITEM = R.drawable.item;
+
     private String title, descriprition;
-    private int image = R.drawable.item;
+    private int image;
     private int quantity;
 
     public Item() {}
@@ -15,6 +17,7 @@ public class Item
         this.title = title;
         this.descriprition = descriprition;
         this.quantity = quantity;
+        this.image = DEFAULT_ITEM;
     }
 
     public Item(String title, String descriprition, int image, int quantity)

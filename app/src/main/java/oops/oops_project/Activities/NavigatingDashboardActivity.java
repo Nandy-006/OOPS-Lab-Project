@@ -1,36 +1,53 @@
 package oops.oops_project.Activities;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+
+import org.w3c.dom.Text;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Stack;
+
 import oops.oops_project.Adapters.FirebaseCategoryAdapter;
 import oops.oops_project.Adapters.FirebaseNotesAdapter;
 import oops.oops_project.Dialogs.AddCategoryDialog;
 import oops.oops_project.FirestoreDatabase.Category;
-import oops.oops_project.Dialogs.AddEventDialog;
+import oops.oops_project.FirestoreDatabase.Event;
 import oops.oops_project.FirestoreDatabase.Note;
 import oops.oops_project.Fragments.DiaryFragment;
 import oops.oops_project.Fragments.InventoryFragment;
 import oops.oops_project.Fragments.NotesFragment;
-import oops.oops_project.Fragments.TasksFragment;
+import oops.oops_project.Fragments.EventsFragment;
 import oops.oops_project.R;
 
 import static oops.oops_project.Activities.DashboardActivity.db;
@@ -71,7 +88,7 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
         int fabImageResource;
 
         if(id == R.id.bnav_inventory) { category = "Inventory"; fragment = new InventoryFragment(); fabImageResource = R.drawable.baseline_add_24;}
-        else if(id == R.id.bnav_tasks) { category = "Tasks"; fragment = new TasksFragment(); fabImageResource = R.drawable.baseline_add_task_24;}
+        else if(id == R.id.bnav_tasks) { category = "Tasks"; fragment = new EventsFragment(); fabImageResource = R.drawable.baseline_add_task_24;}
         else if(id == R.id.bnav_notes) { category = "Notes"; fragment = new NotesFragment(); fabImageResource = R.drawable.baseline_note_add_white_24;}
         else { category = "Diary"; fragment = new DiaryFragment(); fabImageResource = R.drawable.baseline_create_24;}
 
@@ -122,6 +139,11 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
     {
         if(cur_category == "Inventory")
             openDialog();
+        else if(cur_category == "Tasks")
+        {
+            Intent intent = new Intent(this, AddEventActivity.class);
+            startActivity(intent);
+        }
         else if(cur_category.equals("Notes"))
             newNote();
         else if(cur_category.equals("Diary"))
@@ -130,14 +152,6 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
                 saveDiary(false);
             else
                 editDiary();
-        }
-        else if(cur_category.equals("Tasks"))
-        {
-            openEventDialog();
-        }
-        else if(cur_category.equals("Inventory"))
-        {
-            openCategoryDialog();
         }
     }
 
@@ -270,11 +284,6 @@ public class NavigatingDashboardActivity extends AppCompatActivity  implements A
     {
         AddCategoryDialog addCategoryDialog = new AddCategoryDialog();
         addCategoryDialog.show(getSupportFragmentManager(), "add category dialog");
-    }
-
-    public void openEventDialog() {
-        AddEventDialog addEventDialog = new AddEventDialog();
-        addEventDialog.show(getSupportFragmentManager(), "add event dialog");
     }
 
 }
