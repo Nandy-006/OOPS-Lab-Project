@@ -27,7 +27,6 @@ import static oops.oops_project.Activities.DashboardActivity.db;
 public class EventActivity extends AppCompatActivity
 {
     public static final String PATH = "path";
-    private String EVENTS_PATH;
 
     String doc;
     Event cur_event;

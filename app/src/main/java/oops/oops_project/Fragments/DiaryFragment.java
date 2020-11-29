@@ -38,6 +38,8 @@ import oops.oops_project.FirestoreDatabase.Data;
 import oops.oops_project.FirestoreDatabase.DiaryEntry;
 import oops.oops_project.R;
 
+import static oops.oops_project.Activities.DashboardActivity.getUID;
+
 public class DiaryFragment extends Fragment implements View.OnClickListener
 {
     TextView dateTextView;
@@ -46,7 +48,7 @@ public class DiaryFragment extends Fragment implements View.OnClickListener
     Date currentDate;
     boolean firstFragment = true;
 
-    private final String DIARY_PATH = "users" + "/" + Data.DID + "/" + "Diary";
+    private final String DIARY_PATH = "users" + "/" + getUID() + "/" + "Diary";
     private final String KEY_TITLE = "title", KEY_DESC = "desc";
 
     private static final long MILLIS_IN_A_DAY = 1000 * 60 * 60 * 24;

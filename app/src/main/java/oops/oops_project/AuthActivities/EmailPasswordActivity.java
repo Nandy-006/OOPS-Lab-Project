@@ -157,7 +157,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
 					mTextViewProfile.setText(task.getException().getMessage());
 				} else {
 					mTextViewProfile.setTextColor(Color.DKGRAY);
-					Intent intent = new Intent(getApplicationContext(), NavigatingDashboardActivity.class);
+					Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
 					startActivity(intent);
 				}
 				hideProgressDialog();

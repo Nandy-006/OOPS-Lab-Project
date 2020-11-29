@@ -10,8 +10,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import oops.oops_project.FirestoreDatabase.Data;
 import oops.oops_project.FirestoreDatabase.User;
@@ -24,6 +27,9 @@ public class DashboardActivity extends AppCompatActivity
     private final boolean register = false;
 
     public static FirebaseFirestore db() { return FirebaseFirestore.getInstance();}
+    public static StorageReference StRef() { return FirebaseStorage.getInstance().getReference("uploads").child(getUID());}
+    public static FirebaseStorage Storage() { return  FirebaseStorage.getInstance();}
+    public static String getUID() { return FirebaseAuth.getInstance().getCurrentUser().getUid();}
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

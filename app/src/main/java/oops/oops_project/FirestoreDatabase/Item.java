@@ -6,25 +6,17 @@ public class Item
 {
     public static final int DEFAULT_ITEM = R.drawable.item;
 
-    private String title, descriprition;
-    private int image;
+    private String title, description;
+    private String imageUrl;
     private int quantity;
 
     public Item() {}
 
-    public Item(String title, String descriprition, int quantity)
+    public Item(String title, String description, String imageUrl, int quantity)
     {
         this.title = title;
-        this.descriprition = descriprition;
-        this.quantity = quantity;
-        this.image = DEFAULT_ITEM;
-    }
-
-    public Item(String title, String descriprition, int image, int quantity)
-    {
-        this.title = title;
-        this.descriprition = descriprition;
-        this.image = image;
+        this.description = description;
+        this.imageUrl = imageUrl;
         this.quantity = quantity;
     }
 
@@ -34,9 +26,9 @@ public class Item
     public String getTitle() { return title;}
     public void setTitle(String title) { this.title = title;}
 
-    public String getDescriprition() { return descriprition;}
-    public void setDescriprition(String descriprition) { this.descriprition = descriprition;}
+    public String getDescription() { return description;}
+    public void setDescription(String descriprition) { this.description = descriprition;}
 
-    public int getImage() { return image;}
-    public void setImage(int image) { this.image = image;}
+    public String getImage() { return imageUrl;}
+    public void setImage(String imageUrl) { this.imageUrl = imageUrl;}
 }

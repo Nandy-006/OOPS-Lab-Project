@@ -13,6 +13,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import oops.oops_project.FirestoreDatabase.Item;
@@ -30,11 +31,14 @@ public class FirebaseItemAdapter extends FirestoreRecyclerAdapter<Item, Firebase
         MaterialCardView cardView = holder.cardView;
 
         CircleImageView imgView = cardView.findViewById(R.id.item_circle_image_view);
-        imgView.setImageResource(model.getImage());
+        if(model.getImage() != null)
+            Picasso.get().load(model.getImage()).fit().centerCrop().into(imgView);
+        else
+            imgView.setImageResource(R.drawable.item);
         TextView titleText = cardView.findViewById(R.id.item_name);
         titleText.setText(model.getTitle());
         TextView descText = cardView.findViewById(R.id.item_desc);
-        descText.setText(model.getDescriprition());
+        descText.setText(model.getDescription());
         TextView quantityText = cardView.findViewById(R.id.item_quantity_val);
         quantityText.setText(String.valueOf(model.getQuantity()));
 

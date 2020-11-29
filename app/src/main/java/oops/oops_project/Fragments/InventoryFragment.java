@@ -24,9 +24,11 @@ import oops.oops_project.FirestoreDatabase.Category;
 import oops.oops_project.FirestoreDatabase.Data;
 import oops.oops_project.R;
 
+import static oops.oops_project.Activities.DashboardActivity.getUID;
+
 public class InventoryFragment extends Fragment
 {
-    public final static String INVENTORY_PATH = "users" + "/" + Data.DID + "/" + "Inventory";
+    public final static String INVENTORY_PATH = "users" + "/" + getUID() + "/" + "Inventory";
     FirebaseCategoryAdapter adapter;
 
     @Override

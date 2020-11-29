@@ -20,15 +20,17 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.squareup.picasso.Picasso;
 
 import oops.oops_project.FirestoreDatabase.Category;
 import oops.oops_project.FirestoreDatabase.Item;
 import oops.oops_project.R;
 
+import static oops.oops_project.Activities.DashboardActivity.StRef;
+import static oops.oops_project.Activities.DashboardActivity.Storage;
 import static oops.oops_project.Activities.DashboardActivity.db;
 
-public class ItemActivity extends AppCompatActivity
-{
+public class ItemActivity extends AppCompatActivity {
     public static final String PATH = "path";
     String doc;
 
@@ -37,13 +39,12 @@ public class ItemActivity extends AppCompatActivity
     FloatingActionButton updateQuantityFab, deleteItemFab, editItemFab, menuFab;
     LinearLayout updateQuantityLayout, deleteItemLayout, editItemLayout;
     View fabBGLayout;
-    String cur_title, cur_desc;
+    String cur_title, cur_desc, cur_image;
     int cur_quantity;
     boolean isFABOpen = false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
 
@@ -77,24 +78,26 @@ public class ItemActivity extends AppCompatActivity
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         Item item = documentSnapshot.toObject(Item.class);
                         String title = item.getTitle();
-                        String desc = item.getDescriprition();
-                        int img = item.getImage();
+                        String desc = item.getDescription();
                         int quantity = item.getQuantity();
 
                         itemName.setText(title);
                         itemDescription.setText(desc);
-                        itemImage.setImageResource(img);
+                        if(item.getImage() != null)
+                            Picasso.get().load(item.getImage()).fit().centerCrop().into(itemImage);
+                        else
+                            itemImage.setImageResource(R.drawable.item);
                         itemQuantity.setText(String.valueOf(quantity));
 
                         cur_title = title;
                         cur_desc = desc;
                         cur_quantity = quantity;
+                        cur_image = item.getImage();
                     }
                 });
     }
 
-    private void closeFABMenu()
-    {
+    private void closeFABMenu() {
         isFABOpen = false;
         fabBGLayout.setVisibility(View.GONE);
         menuFab.animate().rotation(0);
@@ -128,8 +131,7 @@ public class ItemActivity extends AppCompatActivity
         });
     }
 
-    private void showFABMenu()
-    {
+    private void showFABMenu() {
         isFABOpen = true;
         updateQuantityLayout.setVisibility(View.VISIBLE);
         editItemLayout.setVisibility(View.VISIBLE);
@@ -141,8 +143,7 @@ public class ItemActivity extends AppCompatActivity
         updateQuantityLayout.animate().translationY(-getResources().getDimension(R.dimen.standard_145));
     }
 
-    public void updateQuantity(View view)
-    {
+    public void updateQuantity(View view) {
         Log.d("UPDATE", "ENTERED");
         View input = LayoutInflater.from(this).inflate(R.layout.update_quantity_layout, null);
         ((EditText) input.findViewById(R.id.update_quantiy_value)).setText(String.valueOf(cur_quantity));
@@ -160,7 +161,7 @@ public class ItemActivity extends AppCompatActivity
                     itemQuantity.setText(String.valueOf(quantity));
                     cur_quantity = quantity;
 
-                    db().document(doc).set(new Item(cur_title, cur_desc, quantity))
+                    db().document(doc).update("quantity", quantity)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -168,8 +169,7 @@ public class ItemActivity extends AppCompatActivity
                                     closeFABMenu();
                                 }
                             });
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "Enter valid quantity", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -177,8 +177,7 @@ public class ItemActivity extends AppCompatActivity
         updateDialog.show();
     }
 
-    public void editItem(View view)
-    {
+    public void editItem(View view) {
         View input = LayoutInflater.from(this).inflate(R.layout.edit_item_layout, null);
         ((EditText) input.findViewById(R.id.add_item_title)).setText(cur_title);
         ((EditText) input.findViewById(R.id.add_item_description)).setText(cur_desc);
@@ -193,16 +192,15 @@ public class ItemActivity extends AppCompatActivity
                 String title = ((EditText) input.findViewById(R.id.add_item_title)).getText().toString();
                 String desc = ((EditText) input.findViewById(R.id.add_item_description)).getText().toString();
 
-                if(title.equals(""))
+                if (title.equals(""))
                     Toast.makeText(getApplicationContext(), "Title cannot be empty", Toast.LENGTH_SHORT).show();
-                else
-                {
+                else {
                     itemName.setText(title);
                     itemDescription.setText(desc);
                     cur_title = title;
                     cur_desc = desc;
 
-                    db().document(doc).set(new Item(title, desc, cur_quantity))
+                    db().document(doc).update("title", title, "description", desc)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -216,8 +214,7 @@ public class ItemActivity extends AppCompatActivity
         editDialog.show();
     }
 
-    public void deleteItem(View view)
-    {
+    public void deleteItem(View view) {
         MaterialAlertDialogBuilder deleteDialog = new MaterialAlertDialogBuilder(this);
         deleteDialog.setTitle("Are you sure you want to delete this item ?");
         deleteDialog.setNeutralButton("CANCEL", null);
@@ -225,24 +222,26 @@ public class ItemActivity extends AppCompatActivity
         deleteDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                db().document(doc).delete()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(getApplicationContext(), "Item deleted!", Toast.LENGTH_SHORT).show();
-                                closeFABMenu();
-                                finish();
-                            }
-                        });
+                    db().document(doc).delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getApplicationContext(), "Item deleted!", Toast.LENGTH_SHORT).show();
+                                    closeFABMenu();
+                                    finish();
+                                }
+                            });
             }
         });
         deleteDialog.show();
     }
 
-    public void onClickMenuFab(View view)
-    {
-        if (!isFABOpen) { showFABMenu();}
-        else { closeFABMenu();}
+    public void onClickMenuFab(View view) {
+        if (!isFABOpen) {
+            showFABMenu();
+        } else {
+            closeFABMenu();
+        }
     }
 
     @Override

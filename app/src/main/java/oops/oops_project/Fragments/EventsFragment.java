@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,10 +26,11 @@ import oops.oops_project.FirestoreDatabase.Event;
 import oops.oops_project.R;
 
 import static oops.oops_project.Activities.DashboardActivity.db;
+import static oops.oops_project.Activities.DashboardActivity.getUID;
 
 public class EventsFragment extends Fragment
 {
-    public final static String EVENTS_PATH = "users" + "/" + Data.DID + "/" + "Events";
+    public final static String EVENTS_PATH = "users" + "/" + getUID() + "/" + "Events";
     FirebaseEventsAdapter adapter;
 
     @Override
@@ -82,13 +82,15 @@ public class EventsFragment extends Fragment
     private void updateDatabase()
     {
         Date cur_date = new Date();
-        db().collection(EventActivity.PATH).whereLessThan("datetime", cur_date).get()
+
+        db().collection(EVENTS_PATH).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for(QueryDocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
-                            Toast.makeText(getContext(), "Deleted", Toast.LENGTH_SHORT).show();
-                            documentSnapshot.getReference().delete();
+                            Date event_date = documentSnapshot.toObject(Event.class).getDatetime();
+                            if(cur_date.compareTo(event_date) > 0)
+                                documentSnapshot.getReference().delete();
                         }
                     }
                 });

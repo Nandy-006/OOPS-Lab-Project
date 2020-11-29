@@ -21,10 +21,11 @@ import oops.oops_project.FirestoreDatabase.Note;
 import oops.oops_project.R;
 
 import static oops.oops_project.Activities.DashboardActivity.db;
+import static oops.oops_project.Activities.DashboardActivity.getUID;
 
 public class NotesFragment extends Fragment
 {
-    public final static String NOTES_PATH = "users" + "/" + Data.DID + "/" + "Notes";
+    public final static String NOTES_PATH = "users" + "/" + getUID() + "/" + "Notes";
     FirebaseNotesAdapter adapter;
 
     @Override
