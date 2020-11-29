@@ -1,10 +1,8 @@
 package oops.oops_project.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.animation.Animator;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,19 +13,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squareup.picasso.Picasso;
 
-import oops.oops_project.FirestoreDatabase.Category;
 import oops.oops_project.FirestoreDatabase.Item;
 import oops.oops_project.R;
 
-import static oops.oops_project.Activities.DashboardActivity.StRef;
-import static oops.oops_project.Activities.DashboardActivity.Storage;
 import static oops.oops_project.Activities.DashboardActivity.db;
 
 public class ItemActivity extends AppCompatActivity {
@@ -36,8 +32,8 @@ public class ItemActivity extends AppCompatActivity {
 
     ImageView itemImage;
     TextView itemName, itemDescription, itemQuantity;
-    FloatingActionButton updateQuantityFab, deleteItemFab, editItemFab, menuFab;
-    LinearLayout updateQuantityLayout, deleteItemLayout, editItemLayout;
+    FloatingActionButton updateQuantityFab, deleteItemFab, editItemFab, shareItemFab, menuFab;
+    LinearLayout updateQuantityLayout, deleteItemLayout, editItemLayout, shareItemLayout;
     View fabBGLayout;
     String cur_title, cur_desc, cur_image;
     int cur_quantity;
@@ -58,11 +54,13 @@ public class ItemActivity extends AppCompatActivity {
         updateQuantityFab = findViewById(R.id.update_quantiy_fab);
         deleteItemFab = findViewById(R.id.delete_item_fab);
         editItemFab = findViewById(R.id.edit_item_fab);
+        shareItemFab = findViewById(R.id.share_item_fab);
         menuFab = findViewById(R.id.category_fab);
 
         updateQuantityLayout = findViewById(R.id.update_quantiy_Layout);
         deleteItemLayout = findViewById(R.id.delete_item_Layout);
         editItemLayout = findViewById(R.id.edit_item_Layout);
+        shareItemLayout = findViewById(R.id.share_item_fabLayout);
         fabBGLayout = findViewById(R.id.fabBGLayout);
 
         fabBGLayout.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +101,7 @@ public class ItemActivity extends AppCompatActivity {
         menuFab.animate().rotation(0);
         updateQuantityLayout.animate().translationY(0);
         editItemLayout.animate().translationY(0);
+        shareItemLayout.animate().translationY(0);
         deleteItemLayout.animate().translationY(0);
         deleteItemLayout.animate().translationY(0).setListener(new Animator.AnimatorListener() {
             @Override
@@ -116,6 +115,7 @@ public class ItemActivity extends AppCompatActivity {
                     updateQuantityLayout.setVisibility(View.GONE);
                     editItemLayout.setVisibility(View.GONE);
                     deleteItemLayout.setVisibility(View.GONE);
+                    shareItemLayout.setVisibility(View.GONE);
                 }
             }
 
@@ -136,11 +136,13 @@ public class ItemActivity extends AppCompatActivity {
         updateQuantityLayout.setVisibility(View.VISIBLE);
         editItemLayout.setVisibility(View.VISIBLE);
         deleteItemLayout.setVisibility(View.VISIBLE);
+        shareItemLayout.setVisibility(View.VISIBLE);
         fabBGLayout.setVisibility(View.VISIBLE);
         menuFab.animate().rotationBy(180);
         deleteItemLayout.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
         editItemLayout.animate().translationY(-getResources().getDimension(R.dimen.standard_100));
         updateQuantityLayout.animate().translationY(-getResources().getDimension(R.dimen.standard_145));
+        shareItemLayout.animate().translationY(-getResources().getDimension(R.dimen.standard_190));
     }
 
     public void updateQuantity(View view) {
@@ -251,5 +253,48 @@ public class ItemActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void shareItem(View view)
+    {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        StringBuilder message = new StringBuilder("");
+        message.append("Hey! Here's an item of my inventory : \n\n");
+        message.append("Item Name: " + cur_title + "\nItem Description: " + cur_desc + "\nQuantity :" + cur_quantity);
+        message.append("\n\nSent via Taskete :D");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, message.toString());
+        sendIntent.setType("text/plain");
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
+
+       /* db().collection(doc).orderBy("quantity", Query.Direction.ASCENDING).get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for(QueryDocumentSnapshot documentSnapshot: queryDocumentSnapshots)
+                        {
+                            Item item = documentSnapshot.toObject(Item.class);
+                            String title = item.getTitle();
+                            int quantity = item.getQuantity();
+                            message.append("-> " + title + " --- " + quantity + " units\n");
+
+                        }
+                        message.append("\n\nSent via Taskete :D");
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, message.toString());
+                        sendIntent.setType("text/plain");
+                        Intent shareIntent = Intent.createChooser(sendIntent, null);
+                        startActivity(shareIntent);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Could not retrieve data", Toast.LENGTH_SHORT).show();
+                    }
+                });
+*/
+
+
     }
 }

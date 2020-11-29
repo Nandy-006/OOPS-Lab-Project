@@ -12,17 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OOPS_Project"
         android:title="Taskete">
-
-        <activity android:name=".Activities.AddEventActivity"/>
+        <activity android:name=".Activities.MyAlarm"></activity>
+        <activity android:name=".Activities.AddEventActivity" />
         <activity android:name=".Activities.EventActivity" />
-        <activity android:name=".Activities.MainActivity2"/>
+        <activity android:name=".Activities.MainActivity2" />
         <activity android:name=".Activities.ItemActivity" />
         <activity android:name=".Activities.CategoryActivity" />
         <activity android:name=".Activities.NoteContentActivity" />
         <activity
             android:name=".Activities.NavigatingDashboardActivity"
             android:parentActivityName=".Activities.DashboardActivity" />
-        <activity android:name=".Activities.DashboardActivity"/>
+        <activity android:name=".Activities.DashboardActivity" />
         <activity android:name=".Activities.UserDetailsEntry" />
         <activity android:name=".AuthActivities.Registration" />
         <activity android:name=".Activities.MainActivity" />
@@ -54,6 +54,11 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <receiver
+            android:name="oops.oops_project.Activities.MyAlarm"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

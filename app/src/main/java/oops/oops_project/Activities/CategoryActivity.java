@@ -28,8 +28,10 @@ import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Date;
 
@@ -49,8 +51,8 @@ public class CategoryActivity extends AppCompatActivity {
 
     MaterialTextView titleText, descText;
     RecyclerView recycler;
-    FloatingActionButton addItemFab, deleteCategoryFab, editCategoryFab, menuFab;
-    LinearLayout addItemLayout, deleteCategoryLayout, editCategoryLayout;
+    FloatingActionButton addItemFab, deleteCategoryFab, editCategoryFab, shareCategoryFab, menuFab;
+    LinearLayout addItemLayout, deleteCategoryLayout, editCategoryLayout, shareCategoryLayout;
     View fabBGLayout;
     String doc;
     boolean isFABOpen = false;
@@ -75,11 +77,13 @@ public class CategoryActivity extends AppCompatActivity {
         addItemFab = findViewById(R.id.add_item_fab);
         deleteCategoryFab = findViewById(R.id.delete_category_fab);
         editCategoryFab = findViewById(R.id.edit_category_fab);
+        shareCategoryFab = findViewById(R.id.share_category_fab);
         menuFab = findViewById(R.id.category_fab);
 
         addItemLayout = findViewById(R.id.add_item_fabLayout);
         deleteCategoryLayout = findViewById(R.id.delete_category_fabLayout);
         editCategoryLayout = findViewById(R.id.edit_category_fabLayout);
+        shareCategoryLayout = findViewById(R.id.share_category_fabLayout);
         fabBGLayout = findViewById(R.id.fabBGLayout);
 
         fabBGLayout.setOnClickListener(new View.OnClickListener() {
@@ -207,39 +211,39 @@ public class CategoryActivity extends AppCompatActivity {
             }
         });
         newItemDialog.setPositiveButton("CREATE", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String title = ((EditText) input.findViewById(R.id.add_item_title)).getText().toString();
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String title = ((EditText) input.findViewById(R.id.add_item_title)).getText().toString();
 
-                        if (title.equals(""))
-                            Toast.makeText(getApplicationContext(), "Title is empty!", Toast.LENGTH_SHORT).show();
+                if (title.equals(""))
+                    Toast.makeText(getApplicationContext(), "Title is empty!", Toast.LENGTH_SHORT).show();
+                else {
+
+                    String desc = ((EditText) input.findViewById(R.id.add_item_description)).getText().toString();
+                    int quantity;
+                    try {
+                        quantity = Integer.parseInt(((EditText) input.findViewById(R.id.item_quantity_text_view)).getText().toString());
+                        if (imageUri != null)
+                            uploadItemWithImage(title, desc, quantity);
                         else {
+                            Item item = new Item(title, desc, null, quantity);
 
-                            String desc = ((EditText) input.findViewById(R.id.add_item_description)).getText().toString();
-                            int quantity;
-                            try {
-                                quantity = Integer.parseInt(((EditText) input.findViewById(R.id.item_quantity_text_view)).getText().toString());
-                                if (imageUri != null)
-                                    uploadItemWithImage(title, desc, quantity);
-                                else {
-                                    Item item = new Item(title, desc, null, quantity);
-
-                                    db().collection(ITEMS_PATH)
-                                            .add(item)
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                @Override
-                                                public void onSuccess(DocumentReference documentReference) {
-                                                    Toast.makeText(getApplicationContext(), "Item added!", Toast.LENGTH_SHORT).show();
-                                                    closeFABMenu();
-                                                }
-                                            });
-                                }
-                            } catch (Exception e) {
-                                Toast.makeText(getApplicationContext(), "Enter integer quantity", Toast.LENGTH_SHORT).show();
-                            }
+                            db().collection(ITEMS_PATH)
+                                    .add(item)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Toast.makeText(getApplicationContext(), "Item added!", Toast.LENGTH_SHORT).show();
+                                            closeFABMenu();
+                                        }
+                                    });
                         }
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), "Enter integer quantity", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }
+            }
+        });
         newItemDialog.show();
     }
 
@@ -318,67 +322,108 @@ public class CategoryActivity extends AppCompatActivity {
         editCategoryDialog.show();
     }
 
-    public void onClickMenuFab(View view) {
-        if (!isFABOpen) {
-            showFABMenu();
-        } else {
-            closeFABMenu();
+        public void shareCategory (View view)
+        {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            StringBuilder message = new StringBuilder("");
+            message.append("Hey! Here's one of my inventory categories: \n\n");
+            message.append("Category: " + cur_title + "\nDescription: " + cur_desc + "\n\nItems:\n");
+
+            db().collection(ITEMS_PATH).orderBy("quantity", Query.Direction.ASCENDING).get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                Item item = documentSnapshot.toObject(Item.class);
+                                String title = item.getTitle();
+                                int quantity = item.getQuantity();
+                                message.append("-> " + title + " --- " + quantity + " units\n");
+
+                            }
+                            message.append("\n\nSent via Taskete :D");
+                            sendIntent.putExtra(Intent.EXTRA_TEXT, message.toString());
+                            sendIntent.setType("text/plain");
+                            Intent shareIntent = Intent.createChooser(sendIntent, null);
+                            startActivity(shareIntent);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Could not retrieve data", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
         }
-    }
 
-    private void showFABMenu() {
-        isFABOpen = true;
-        addItemLayout.setVisibility(View.VISIBLE);
-        editCategoryLayout.setVisibility(View.VISIBLE);
-        deleteCategoryLayout.setVisibility(View.VISIBLE);
-        fabBGLayout.setVisibility(View.VISIBLE);
-        menuFab.animate().rotationBy(180);
-        deleteCategoryLayout.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
-        editCategoryLayout.animate().translationY(-getResources().getDimension(R.dimen.standard_100));
-        addItemLayout.animate().translationY(-getResources().getDimension(R.dimen.standard_145));
-
-    }
-
-    private void closeFABMenu() {
-        isFABOpen = false;
-        fabBGLayout.setVisibility(View.GONE);
-        menuFab.animate().rotation(0);
-        addItemLayout.animate().translationY(0);
-        editCategoryLayout.animate().translationY(0);
-        deleteCategoryLayout.animate().translationY(0);
-        deleteCategoryLayout.animate().translationY(0).setListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
+        public void onClickMenuFab (View view)
+        {
+            if (!isFABOpen) {
+                showFABMenu();
+            } else {
+                closeFABMenu();
             }
+        }
 
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                if (!isFABOpen) {
-                    addItemLayout.setVisibility(View.GONE);
-                    editCategoryLayout.setVisibility(View.GONE);
-                    deleteCategoryLayout.setVisibility(View.GONE);
+        private void showFABMenu () {
+            isFABOpen = true;
+            addItemLayout.setVisibility(View.VISIBLE);
+            editCategoryLayout.setVisibility(View.VISIBLE);
+            deleteCategoryLayout.setVisibility(View.VISIBLE);
+            shareCategoryLayout.setVisibility(View.VISIBLE);
+            fabBGLayout.setVisibility(View.VISIBLE);
+            menuFab.animate().rotationBy(180);
+            deleteCategoryLayout.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
+            editCategoryLayout.animate().translationY(-getResources().getDimension(R.dimen.standard_100));
+            addItemLayout.animate().translationY(-getResources().getDimension(R.dimen.standard_145));
+            shareCategoryLayout.animate().translationY(-getResources().getDimension(R.dimen.standard_190));
+
+        }
+
+        private void closeFABMenu () {
+            isFABOpen = false;
+            fabBGLayout.setVisibility(View.GONE);
+            menuFab.animate().rotation(0);
+            addItemLayout.animate().translationY(0);
+            shareCategoryLayout.animate().translationY(0);
+            editCategoryLayout.animate().translationY(0);
+            deleteCategoryLayout.animate().translationY(0);
+            deleteCategoryLayout.animate().translationY(0).setListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {
+
                 }
+
+                @Override
+                public void onAnimationEnd(Animator animator) {
+                    if (!isFABOpen) {
+                        addItemLayout.setVisibility(View.GONE);
+                        editCategoryLayout.setVisibility(View.GONE);
+                        deleteCategoryLayout.setVisibility(View.GONE);
+                        shareCategoryLayout.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {
+
+                }
+            });
+        }
+
+        @Override
+        public void onBackPressed () {
+            if (isFABOpen) {
+                closeFABMenu();
+            } else {
+                super.onBackPressed();
             }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        });
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (isFABOpen) {
-            closeFABMenu();
-        } else {
-            super.onBackPressed();
         }
     }
-}

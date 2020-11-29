@@ -1,9 +1,17 @@
 package oops.oops_project.Activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +46,8 @@ public class AddEventActivity extends AppCompatActivity {
 
     String dateTimeString;
 
+
+    long timeinms;
     boolean isEdit = false;
 
     @Override
@@ -90,7 +100,8 @@ public class AddEventActivity extends AppCompatActivity {
             String name, desc;
             if(!isEdit)
             {
-                dateTimeString = String.format(Locale.getDefault(), "%02d", chosenDate) +
+
+                        dateTimeString = String.format(Locale.getDefault(), "%02d", chosenDate) +
                         String.format(Locale.getDefault(), "%02d", chosenMonth + 1) +
                         chosenYear + String.format(Locale.getDefault(), "%02d", chosenHour) +
                         String.format(Locale.getDefault(), "%02d", chosenMinute);
@@ -100,6 +111,40 @@ public class AddEventActivity extends AppCompatActivity {
                 name = nameText.getText().toString();
                 desc = descText.getText().toString();
                 wantReminder = checkBox.isChecked();
+
+                /*timeinms = date.getTime()- (new Date()).getTime();
+
+                Intent intent = new Intent(this, MyAlarm.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        this.getApplicationContext(), 234324243, intent, 0);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
+                        + timeinms , pendingIntent);
+                Toast.makeText(this, "Alarm set in " + timeinms + " ms",Toast.LENGTH_LONG).show();*/
+                if(wantReminder)
+                {
+                    Toast.makeText(this, "Reminder", Toast.LENGTH_SHORT).show();
+                    Intent intent= new Intent(AddEventActivity.this, MyAlarm.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(AddEventActivity.this, 0, intent, 0);
+
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+                    long timeAtButtonClick = System.currentTimeMillis();
+
+                    long tenSecondsInMillis = 1300*10;
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, timeAtButtonClick+tenSecondsInMillis, pendingIntent);
+                }
+
+
+                /*Calendar calendar = Calendar.getInstance();
+
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
+                            chosenHour, chosenMinute, 0);
+
+                timeinms = calendar.getTimeInMillis();
+                Toast.makeText(this, Long.toString(timeinms), Toast.LENGTH_SHORT).show();
+                setAlarm(timeinms);*/
+
 
                 Event event = new Event(name, desc, date, wantReminder);
 
@@ -118,6 +163,24 @@ public class AddEventActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Couldn't get date", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    /*@RequiresApi(api = Build.VERSION_CODES.O)
+    */
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void CreateNotificationChannel()
+    {
+        /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.)
+        {*/
+            CharSequence name = "Taskete";
+            String description = "reminder for task";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("noitfytask", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        /*}*/
     }
 
     public void delete(View view)
@@ -170,6 +233,23 @@ public class AddEventActivity extends AppCompatActivity {
             }
         }, mHour, mMinute, true);
         timePickerDialog.show();
+    }
+
+    private void setAlarm(long time) {
+        //getting the alarm manager
+        /*AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        //creating a new intent specifying the broadcast receiver
+        Intent i = new Intent(this, MyAlarm.class);
+
+        //creating a pending intent using the intent
+        PendingIntent pi = PendingIntent.getBroadcast(this, 0, i, 0);
+
+        //setting the repeating alarm that will be fired every day
+        am.setRepeating(AlarmManager.RTC, time, AlarmManager.INTERVAL_DAY, pi);
+        Toast.makeText(this, "Alarm is set in " + Long.toString(time) + "ms", Toast.LENGTH_LONG).show();*/
+
+
     }
 
 }
